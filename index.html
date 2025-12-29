@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HT1 Client :: Elite Deadshot Gaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-light: #1a1f2e;
+            --border: #2d3748;
+            --accent: #00ff88;
+            --error: #ff3366;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --yellow: #ffd700;
+            --blue: #00bfff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Grid */
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridScroll 20s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Glowing Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--blue);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 100px) scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 40px 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .terminal-header {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00dd77;
+            box-shadow: 0 6px 30px rgba(0, 255, 136, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            color: white;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-discord:hover {
+            background: #4752C4;
+            box-shadow: 0 6px 30px rgba(88, 101, 242, 0.6);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 40px;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            color: var(--text-dim);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .feature-description {
+            color: var(--text-dim);
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 12px;
+            margin-top: auto;
+        }
+
+        .feature-list li {
+            padding-left: 16px;
+            position: relative;
+            color: var(--text-dim);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        /* Single column layout for feature lists with 2 or fewer items */
+        .feature-list.compact {
+            grid-template-columns: 1fr;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 191, 255, 0.1));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 20px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: var(--text-dim);
+            font-size: 14px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Terminal Effect */
+        .terminal-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .feature-icon {
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">[HT1] CLIENT</div>
+            <ul class="nav-links">
+                <li><a href="#features">> FEATURES</a></li>
+                <li><a href="#download">> DOWNLOAD</a></li>
+                <li><a href="#discord">> DISCORD</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="terminal-header">> INITIALIZING_HT1_CLIENT_SYSTEM...</div>
+            <h1>HT1 CLIENT</h1>
+            <p>Elite Deadshot.io gaming experience with advanced overlays, performance optimization, and clan-exclusive features.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">> DOWNLOAD CLIENT</a>
+                <a href="#features" class="btn btn-secondary">> VIEW FEATURES</a>
+                <a href="https://discord.gg/your-server" target="_blank" class="btn btn-discord">> JOIN DISCORD</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Auto Updates</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Clan Verified</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number">0ms</div>
+                    <div class="stat-label">Added Latency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">> SYSTEM_FEATURES</span>
+                <h2 class="section-title">Built for Elite Performance</h2>
+                <p class="section-description">Powerful features designed exclusively for [HT1] clan members to dominate Deadshot.io</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Stats Overlay</h3>
+                    </div>
+                    <p class="feature-description">Real-time performance monitoring with customizable HUD.</p>
+                    <ul class="feature-list">
+                        <li>FPS Counter</li>
+                        <li>Ping Monitor</li>
+                        <li>K/D Tracker</li>
+                        <li>Session Stats</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🔐</div>
+                        <h3 class="feature-title">Clan Verification</h3>
+                    </div>
+                    <p class="feature-description">Automatic [HT1] tag verification with Google auth.</p>
+                    <ul class="feature-list">
+                        <li>Tag Verification</li>
+                        <li>OAuth Integration</li>
+                        <li>Activity Tracking</li>
+                        <li>Member Dashboard</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Performance</h3>
+                    </div>
+                    <p class="feature-description">Maximum FPS and minimal latency for competitive edge.</p>
+                    <ul class="feature-list">
+                        <li>FPS Unlock</li>
+                        <li>GPU Accel</li>
+                        <li>Ad Blocker</li>
+                        <li>Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🎮</div>
+                        <h3 class="feature-title">Keybinds</h3>
+                    </div>
+                    <p class="feature-description">Customizable controls with visual overlay indicators.</p>
+                    <ul class="feature-list">
+                        <li>Key Display</li>
+                        <li>Custom Bindings</li>
+                        <li>Profiles</li>
+                        <li>Quick Switch</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">Crosshairs</h3>
+                    </div>
+                    <p class="feature-description">Professional crosshair customization with presets.</p>
+                    <ul class="feature-list">
+                        <li>7+ Styles</li>
+                        <li>Colors</li>
+                        <li>Size Control</li>
+                        <li>Live Preview</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">Auto-Update</h3>
+                    </div>
+                    <p class="feature-description">Seamless updates with zero downtime.</p>
+                    <ul class="feature-list">
+                        <li>Auto Updates</li>
+                        <li>Version Control</li>
+                        <li>Rollback</li>
+                        <li>Notifications</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">💬</div>
+                        <h3 class="feature-title">Discord</h3>
+                    </div>
+                    <p class="feature-description">Rich presence and activity status integration.</p>
+                    <ul class="feature-list">
+                        <li>Rich Presence</li>
+                        <li>Activity Status</li>
+                        <li>Clan Badge</li>
+                        <li>Quick Join</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">Security</h3>
+                    </div>
+                    <p class="feature-description">Built secure - your data stays yours.</p>
+                    <ul class="feature-list">
+                        <li>Open Source</li>
+                        <li>Local Storage</li>
+                        <li>Encrypted</li>
+                        <li>No Telemetry</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-header">
+                        <div class="feature-icon">⚙️</div>
+                        <h3 class="feature-title">Settings</h3>
+                    </div>
+                    <p class="feature-description">Fine-tune with console-themed settings panel.</p>
+                    <ul class="feature-list">
+                        <li>Graphics</li>
+                        <li>Audio</li>
+                        <li>Network</li>
+                        <li>Profiles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="download">
+        <div class="container">
+            <h2>Ready to <span class="terminal-text">dominate</span>?</h2>
+            <p>Join 500+ elite [HT1] members using the most advanced Deadshot.io client.</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/iydebu/HT1-Client-Releases/releases/latest/download/HT1.Client.Setup.1.1.1.exe" class="btn btn-primary">> DOWNLOAD FOR WINDOWS</a>
+                <a href="https://discord.gg/your-server" target="_blank" class="btn btn-discord">> JOIN DISCORD SERVER</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: var(--text-dim);">
+                <span class="terminal-text">></span> Windows 10/11 | 64-bit | v1.1.1 | Auto-updates enabled
+            </p>
+        </div>
+    </section>
+
+    <!-- Discord Section -->
+    <section class="features" id="discord" style="padding: 80px 40px; background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">> JOIN_THE_COMMUNITY</span>
+                <h2 class="section-title">Connect with [HT1] Clan</h2>
+                <p class="section-description">Get support, share strategies, and coordinate with fellow clan members on Discord.</p>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <div class="feature-card" style="margin-bottom: 30px;">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Active Community</h3>
+                    <p class="feature-description">Connect with 500+ verified [HT1] members, get instant support, and coordinate gameplay.</p>
+                    <ul class="feature-list" style="text-align: left;">
+                        <li>24/7 Active Community</li>
+                        <li>Technical Support</li>
+                        <li>Strategy Sharing</li>
+                        <li>Clan Events & Tournaments</li>
+                        <li>Update Announcements</li>
+                    </ul>
+                </div>
+                <a href="https://discord.gg/your-server" target="_blank" class="btn btn-discord" style="font-size: 16px; padding: 20px 50px;">
+                    > JOIN DISCORD SERVER
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">[HT1] CLIENT</div>
+            <p class="footer-text">Elite Deadshot.io gaming client for [HT1] clan members.</p>
+            <div class="footer-links">
+                <a href="https://github.com/iydebu/HT1-Client-Releases" target="_blank">GitHub</a>
+                <a href="https://discord.gg/your-server" target="_blank">Discord</a>
+                <a href="https://deadshot.io" target="_blank">Deadshot.io</a>
+            </div>
+            <div class="copyright">
+                <p><span class="terminal-text">></span> 2025 HT1 Client. Built with <span style="color: var(--accent);">♥</span> for the [HT1] clan.</p>
+                <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. For [HT1] clan members only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Check on load
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Terminal Effect on Load
+        window.addEventListener('load', () => {
+            console.log('%c> HT1_CLIENT_INITIALIZED', 'color: #00ff88; font-family: monospace; font-size: 14px;');
+            console.log('%c> SYSTEM_STATUS: OPERATIONAL', 'color: #00ff88; font-family: monospace; font-size: 14px;');
+            console.log('%c> ACCESS_LEVEL: ELITE', 'color: #00ff88; font-family: monospace; font-size: 14px;');
+        });
+
+        // Animate Stats Numbers
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + (end === 500 ? '+' : end === 100 ? '%' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger stats animation when visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach((stat, index) => {
+                        const finalValues = [500, 24, 100, 0];
+                        setTimeout(() => {
+                            animateValue(stat, 0, finalValues[index], 2000);
+                        }, index * 100);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
