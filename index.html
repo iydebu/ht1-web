@@ -610,7 +610,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item reveal">
-                    <div class="stat-number">500+</div>
+                    <div class="stat-number">200+</div>
                     <div class="stat-label">Active Members</div>
                 </div>
                 <div class="stat-item reveal">
@@ -850,13 +850,13 @@
     <section class="cta" id="download">
         <div class="container">
             <h2>Ready to <span class="terminal-text">dominate</span>?</h2>
-            <p>Join 500+ elite [HT1] members using the most advanced Deadshot.io client.</p>
+            <p>Join 200+ elite [HT1] members using the most advanced Deadshot.io client.</p>
             <div class="hero-buttons">
                 <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary">> DOWNLOAD FOR WINDOWS</a>
                 <a href="https://discord.gg/Asa9QvFKJq" target="_blank" class="btn btn-discord">> JOIN DISCORD SERVER</a>
             </div>
             <p style="margin-top: 20px; font-size: 14px; color: var(--text-dim);">
-                <span class="terminal-text">></span> Windows 10/11 | 64-bit | v1.1.1 | Auto-updates enabled
+                <span class="terminal-text">></span> Windows 10/11 | 64-bit | v2.0.1 | Auto-updates enabled
             </p>
         </div>
     </section>
@@ -874,7 +874,7 @@
                 <div class="feature-card" style="margin-bottom: 30px;">
                     <div class="feature-icon">💬</div>
                     <h3 class="feature-title">Active Community</h3>
-                    <p class="feature-description">Connect with 500+ verified [HT1] members, get instant support, and coordinate gameplay.</p>
+                    <p class="feature-description">Connect with 200+ verified [HT1] members, get instant support, and coordinate gameplay.</p>
                     <ul class="feature-list" style="text-align: left;">
                         <li>24/7 Active Community</li>
                         <li>Technical Support</li>
@@ -901,7 +901,7 @@
                 <a href="https://deadshot.io" target="_blank">Deadshot.io</a>
             </div>
             <div class="copyright">
-                <p><span class="terminal-text">></span> 2025 HT1 Client. Built with <span style="color: var(--accent);">♥</span> for the [HT1] clan.</p>
+                <p><span class="terminal-text">></span> 2026 HT1 Client. Built with <span style="color: var(--accent);">♥</span> for the [HT1] clan.</p>
                 <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. For [HT1] clan members only.</p>
             </div>
         </div>
@@ -952,7 +952,7 @@
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const value = Math.floor(progress * (end - start) + start);
-                element.innerHTML = value + (end === 500 ? '+' : end === 100 ? '%' : '');
+                element.innerHTML = value + (end === 200 ? '+' : end === 100 ? '%' : '');
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
@@ -966,7 +966,7 @@
                 if (entry.isIntersecting) {
                     const statNumbers = entry.target.querySelectorAll('.stat-number');
                     statNumbers.forEach((stat, index) => {
-                        const finalValues = [500, 24, 100, 0];
+                        const finalValues = [200, 24, 100, 0];
                         setTimeout(() => {
                             animateValue(stat, 0, finalValues[index], 2000);
                         }, index * 100);
