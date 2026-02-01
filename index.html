@@ -649,6 +649,147 @@
             color: var(--text-dim);
         }
 
+        a.trust-badge:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        a.trust-badge:hover span {
+            color: var(--accent);
+        }
+
+        /* Security Section */
+        .security-section {
+            padding: 100px 40px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .security-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .security-card.main-card {
+            text-align: center;
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(0, 255, 136, 0.05) 0%, var(--bg-card) 100%);
+        }
+
+        .security-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .virustotal-logo {
+            margin-bottom: 20px;
+        }
+
+        .virustotal-logo img {
+            border-radius: 16px;
+        }
+
+        .security-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .security-card p {
+            color: var(--text-dim);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .security-btn {
+            margin-bottom: 20px;
+        }
+
+        .scan-result {
+            padding: 12px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .scan-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .security-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .security-card.small-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+        }
+
+        .security-card.small-card p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .security-icon-small {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .security-card h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .security-note {
+            max-width: 800px;
+            margin: 40px auto 0;
+            padding: 20px 24px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            text-align: left;
+        }
+
+        .note-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .security-note span:last-child {
+            color: var(--text-dim);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Download CTA Section */
         .download-cta {
             padding: 100px 40px;
@@ -858,6 +999,7 @@
             <div class="logo">[HT1] CLIENT</div>
             <ul class="nav-links">
                 <li><a href="#features">> FEATURES</a></li>
+                <li><a href="#security">> SECURITY</a></li>
                 <li><a href="#download">> DOWNLOAD</a></li>
                 <li><a href="https://discord.gg/Asa9QvFKJq" target="_blank">> DISCORD</a></li>
             </ul>
@@ -1150,6 +1292,10 @@
             </div>
 
             <div class="trust-badges">
+                <a href="https://www.virustotal.com/gui/file/fb36db26cecef20f5933d625d4848d194b75da0cd1cdc8d76789079faee9a4f9/detection" target="_blank" class="trust-badge" style="text-decoration: none; cursor: pointer;">
+                    <img src="https://www.virustotal.com/gui/images/manifest/icon-192x192.png" alt="VirusTotal" width="20" height="20" style="border-radius: 4px;">
+                    <span>VirusTotal Verified</span>
+                </a>
                 <div class="trust-badge">
                     <span class="icon">✓</span>
                     <span>Clan Verified</span>
@@ -1166,6 +1312,54 @@
                     <span class="icon">💬</span>
                     <span>Discord Support</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="security-section" id="security">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">> SECURITY_FIRST</span>
+                <h2 class="section-title">100% Safe & Verified</h2>
+                <p style="color: var(--text-dim); font-size: 17px; max-width: 600px; margin: 0 auto;">We know you've seen sketchy clients before. That's why we're fully transparent.</p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-card main-card">
+                    <div class="virustotal-logo">
+                        <img src="https://www.virustotal.com/gui/images/manifest/icon-192x192.png" alt="VirusTotal" width="80" height="80">
+                    </div>
+                    <h3>VirusTotal Verified</h3>
+                    <p>Our client has been scanned by 70+ antivirus engines. Zero threats detected. Don't take our word for it - check the report yourself.</p>
+                    <a href="https://www.virustotal.com/gui/file/fb36db26cecef20f5933d625d4848d194b75da0cd1cdc8d76789079faee9a4f9/detection" target="_blank" class="btn btn-secondary security-btn">> VIEW VIRUSTOTAL REPORT</a>
+                    <div class="scan-result">
+                        <span class="scan-status">✓ 0/70+ detections</span>
+                    </div>
+                </div>
+
+                <div class="security-features">
+                    <div class="security-card small-card">
+                        <div class="security-icon-small">🏆</div>
+                        <h4>Trusted by 200+ Players</h4>
+                        <p>Active clan members use HT1 daily. No reports of issues, no malware, no problems. Just gaming.</p>
+                    </div>
+                    <div class="security-card small-card">
+                        <div class="security-icon-small">🔒</div>
+                        <h4>No Data Collection</h4>
+                        <p>We don't collect your passwords, game data, or personal info. Your privacy stays yours.</p>
+                    </div>
+                    <div class="security-card small-card">
+                        <div class="security-icon-small">⚡</div>
+                        <h4>Electron-Based</h4>
+                        <p>Built with the same tech as Discord, VS Code, and Slack. Trusted by millions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="security-note">
+                <span class="note-icon">💡</span>
+                <span>Windows SmartScreen may show a warning because we're a new app. This is normal for indie software - click "More info" → "Run anyway" to proceed.</span>
             </div>
         </div>
     </section>
