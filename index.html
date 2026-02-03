@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HT1 Client V3.0 :: Dominate Deadshot.io</title>
+    <title>HT1 Client V4.0 :: Dominate Deadshot.io</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -121,7 +121,7 @@
             max-width: 900px;
         }
 
-        /* V3.0 Badge - Static */
+        /* V4.0 Badge - Static */
         .version-badge {
             display: inline-flex;
             align-items: center;
@@ -902,6 +902,138 @@
             border-top: 1px solid var(--border);
         }
 
+        /* Apex Mode Section */
+        .apex-section {
+            padding: 100px 40px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-dark);
+        }
+
+        .apex-visual-bg {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.03) 0%, var(--bg-light) 50%, rgba(0, 255, 136, 0.03) 100%);
+        }
+
+        .apex-mockup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .apex-badge-mockup {
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px 32px;
+            text-align: center;
+            min-width: 220px;
+        }
+
+        .apex-badge-mockup .badge-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .apex-badge-mockup .badge-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 6px;
+        }
+
+        .apex-badge-mockup .badge-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        .apex-screen-mockup {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .apex-fps-mockup {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .apex-fps-mockup .fps-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
+
+        .apex-fps-mockup .fps-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .apex-fps-mockup .fps-unit {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .apex-features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .apex-feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            transition: border-color 0.2s;
+        }
+
+        .apex-feature-card:hover {
+            border-color: var(--accent);
+        }
+
+        .apex-feature-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .apex-feature-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .apex-feature-desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .split-section {
@@ -930,6 +1062,9 @@
                 padding: 10px 0;
             }
             .features-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .apex-features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -986,6 +1121,9 @@
             .features-row {
                 grid-template-columns: 1fr;
             }
+            .apex-features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -998,6 +1136,7 @@
         <div class="nav-container">
             <div class="logo">[HT1] CLIENT</div>
             <ul class="nav-links">
+                <li><a href="#apex">> APEX MODE</a></li>
                 <li><a href="#features">> FEATURES</a></li>
                 <li><a href="#security">> SECURITY</a></li>
                 <li><a href="#download">> DOWNLOAD</a></li>
@@ -1011,13 +1150,76 @@
         <div class="hero-content">
             <div class="version-badge">
                 <div class="dot"></div>
-                <span>V3.0 NOW LIVE</span>
+                <span>V4.0 NOW LIVE</span>
             </div>
             <h1>Dominate Deadshot.io</h1>
             <p class="tagline">The only client built for winners.</p>
-            <p class="sub-tagline">Custom weapon skins. Instant team-ups. Runs on any PC.</p>
+            <p class="sub-tagline">Custom weapon skins. Instant team-ups. Runs on any PC. Now with APEX Mode.</p>
             <div class="hero-cta">
-                <a href="#download" class="btn btn-primary download-btn">> DOWNLOAD V3.0</a>
+                <a href="#download" class="btn btn-primary download-btn">> DOWNLOAD V4.0</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apex Mode Section -->
+    <section class="apex-section" id="apex">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">> NEW_IN_V4.0</span>
+                <h2 class="section-title">Introducing APEX Mode</h2>
+                <p style="color: var(--text-dim); font-size: 17px; max-width: 600px; margin: 0 auto;">Pure performance. Zero distractions.</p>
+            </div>
+
+            <div class="split-section">
+                <div class="split-content">
+                    <span class="split-tag">> APEX_MODE</span>
+                    <h2 class="split-title">Maximum FPS. Nothing Else.</h2>
+                    <p class="split-description">
+                        APEX Mode strips the game down to raw performance. No clutter, no distractions — just you, your aim, and maximum frames. Toggle it on and watch your FPS climb.
+                        <br><br>
+                        Built for players who want every competitive edge without the noise.
+                    </p>
+                    <div class="split-tagline">One toggle. Maximum performance.</div>
+                </div>
+                <div class="split-visual apex-visual-bg">
+                    <div class="apex-mockup">
+                        <div class="apex-badge-mockup">
+                            <div class="badge-label">MODE</div>
+                            <div class="badge-title">APEX</div>
+                            <div class="badge-status">● ACTIVE</div>
+                        </div>
+                        <div class="apex-screen-mockup">
+                            <div class="apex-fps-mockup">
+                                <span class="fps-label">ULTRA FPS</span>
+                                <span class="fps-value">144</span>
+                                <span class="fps-unit">FPS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apex-features-grid">
+                <div class="apex-feature-card">
+                    <div class="apex-feature-icon">⚡</div>
+                    <div class="apex-feature-title">ULTRA FPS</div>
+                    <div class="apex-feature-desc">Permanent FPS counter so you always know your performance.</div>
+                </div>
+                <div class="apex-feature-card">
+                    <div class="apex-feature-icon">📸</div>
+                    <div class="apex-feature-title">Branded Screenshot</div>
+                    <div class="apex-feature-desc">Capture gameplay moments with HT1 branding built in.</div>
+                </div>
+                <div class="apex-feature-card">
+                    <div class="apex-feature-icon">⚙</div>
+                    <div class="apex-feature-title">Engine Controls</div>
+                    <div class="apex-feature-desc">Smooth FPS, Render Engine, and Reboot controls at your fingertips.</div>
+                </div>
+                <div class="apex-feature-card">
+                    <div class="apex-feature-icon">🔄</div>
+                    <div class="apex-feature-title">Mode Selection</div>
+                    <div class="apex-feature-desc">Choose APEX or Normal mode. Switch anytime you want.</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1368,7 +1570,7 @@
     <section class="download-cta" id="download">
         <div class="download-cta-content">
             <h2>Ready to <span style="color: var(--accent);">dominate</span>?</h2>
-            <p>Download HT1 Client V3.0 and join the elite.</p>
+            <p>Download HT1 Client V4.0 and join the elite.</p>
 
             <div class="download-btn-group">
                 <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary download-btn">> DOWNLOAD FOR WINDOWS</a>
@@ -1376,7 +1578,7 @@
             </div>
 
             <p class="version-info">
-                <span>></span> Version <span>3.0.0</span> | Windows 10/11 | 64-bit | Auto-updates enabled
+                <span>></span> Version <span>4.0.0</span> | Windows 10/11 | 64-bit | Auto-updates enabled
             </p>
 
             <div class="platform-badges">
@@ -1390,7 +1592,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">[HT1] CLIENT V3.0</div>
+            <div class="footer-logo">[HT1] CLIENT V4.0</div>
             <p class="footer-text">Elite Deadshot.io gaming client for [HT1] clan members.</p>
             <div class="footer-links">
                 <a href="https://github.com/iydebu/HT1-Client-Releases" target="_blank">GitHub</a>
