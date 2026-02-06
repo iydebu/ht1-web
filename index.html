@@ -1059,6 +1059,238 @@
             line-height: 1.6;
         }
 
+        /* Integrity Banner */
+        .integrity-banner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            padding: 16px 24px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .integrity-banner-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .integrity-banner-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .integrity-banner-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        .integrity-banner-text {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* Integrity Features List (inside card) */
+        .integrity-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .integrity-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .integrity-check {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Security Features Row */
+        .security-features-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .security-feature-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .security-feature-box-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .security-feature-box-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .security-feature-box-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* Anti-Cheat Section */
+        .anticheat-section {
+            padding: 100px 40px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-dark);
+        }
+
+        .anticheat-visual-bg {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.03) 0%, var(--bg-light) 50%, rgba(0, 255, 136, 0.03) 100%);
+        }
+
+        .anticheat-mockup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .anticheat-status-card {
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 28px 32px;
+            min-width: 300px;
+        }
+
+        .anticheat-status-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .anticheat-pulse {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .anticheat-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .anticheat-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .anticheat-step.done .step-icon {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .anticheat-step.done .step-text {
+            color: var(--text);
+        }
+
+        .anticheat-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .result-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+        }
+
+        .result-timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .anticheat-features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .anticheat-feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            transition: border-color 0.2s;
+        }
+
+        .anticheat-feature-card:hover {
+            border-color: var(--accent);
+        }
+
+        .anticheat-feature-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .anticheat-feature-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .anticheat-feature-desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .split-section {
@@ -1090,6 +1322,12 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .apex-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .security-features-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .anticheat-features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -1124,6 +1362,11 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
             }
+            .integrity-banner {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
             .crosshair-item {
                 padding: 16px;
             }
@@ -1149,6 +1392,12 @@
             .apex-features-grid {
                 grid-template-columns: 1fr;
             }
+            .security-features-row {
+                grid-template-columns: 1fr;
+            }
+            .anticheat-features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1163,6 +1412,7 @@
             <ul class="nav-links">
                 <li><a href="#apex">> APEX MODE</a></li>
                 <li><a href="#features">> FEATURES</a></li>
+                <li><a href="#anticheat">> ANTI-CHEAT</a></li>
                 <li><a href="#security">> SECURITY</a></li>
                 <li><a href="#download">> DOWNLOAD</a></li>
                 <li><a href="https://discord.gg/Asa9QvFKJq" target="_blank">> DISCORD</a></li>
@@ -1543,6 +1793,81 @@
         </div>
     </section>
 
+    <!-- Anti-Cheat Section -->
+    <section class="anticheat-section" id="anticheat">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">> ANTI_CHEAT</span>
+                <h2 class="section-title">Built-In Integrity System</h2>
+                <p style="color: var(--text-dim); font-size: 17px; max-width: 650px; margin: 0 auto;">No more "just stream to prove it." The client proves your files are untouched — automatically, every launch.</p>
+            </div>
+
+            <div class="split-section">
+                <div class="split-content">
+                    <span class="split-tag">> FILE_INTEGRITY</span>
+                    <h2 class="split-title">Server-Verified. Can't Be Faked.</h2>
+                    <p class="split-description">
+                        Every time you launch HT1 Client, the server picks random files from your install and asks your client to hash them. The hashes are compared server-side — any mismatch gets flagged instantly.
+                        <br><br>
+                        Modified a single byte? The system catches it. No one can cheat and claim they're clean — the server does the proving.
+                    </p>
+                    <div class="split-tagline">Verified sessions. Server-proven integrity. Maximum fairness.</div>
+                </div>
+                <div class="split-visual anticheat-visual-bg">
+                    <div class="anticheat-mockup">
+                        <div class="anticheat-status-card">
+                            <div class="anticheat-status-header">
+                                <div class="anticheat-pulse"></div>
+                                <span>INTEGRITY CHECK</span>
+                            </div>
+                            <div class="anticheat-steps">
+                                <div class="anticheat-step done">
+                                    <span class="step-icon">✓</span>
+                                    <span class="step-text">Challenge received</span>
+                                </div>
+                                <div class="anticheat-step done">
+                                    <span class="step-icon">✓</span>
+                                    <span class="step-text">Files hashed (6/6)</span>
+                                </div>
+                                <div class="anticheat-step done">
+                                    <span class="step-icon">✓</span>
+                                    <span class="step-text">Server verified</span>
+                                </div>
+                            </div>
+                            <div class="anticheat-result">
+                                <span class="result-badge">VERIFIED</span>
+                                <span class="result-timer">Session: 30:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="anticheat-features-grid">
+                <div class="anticheat-feature-card">
+                    <div class="anticheat-feature-icon">🔍</div>
+                    <div class="anticheat-feature-title">Byte-Level Detection</div>
+                    <div class="anticheat-feature-desc">Even a single modified byte in any file triggers a flag. Nothing slips through.</div>
+                </div>
+                <div class="anticheat-feature-card">
+                    <div class="anticheat-feature-icon">☁️</div>
+                    <div class="anticheat-feature-title">Server-Side Verification</div>
+                    <div class="anticheat-feature-desc">Hashes are verified on the server. Can't be faked or bypassed client-side.</div>
+                </div>
+                <div class="anticheat-feature-card">
+                    <div class="anticheat-feature-icon">⏱️</div>
+                    <div class="anticheat-feature-title">30-Min Sessions</div>
+                    <div class="anticheat-feature-desc">Integrity is re-verified every 30 minutes. Continuous protection, not just at launch.</div>
+                </div>
+                <div class="anticheat-feature-card">
+                    <div class="anticheat-feature-icon">🔔</div>
+                    <div class="anticheat-feature-title">Instant Tamper Alerts</div>
+                    <div class="anticheat-feature-desc">Modified files trigger immediate alerts. Cheaters get caught, not accused.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Security Section -->
     <section class="security-section" id="security">
         <div class="container">
@@ -1552,7 +1877,7 @@
                 <p style="color: var(--text-dim); font-size: 17px; max-width: 600px; margin: 0 auto;">We know you've seen sketchy clients before. That's why we're fully transparent.</p>
             </div>
 
-            <div class="security-grid">
+            <div class="security-grid" style="grid-template-columns: 1fr;">
                 <div class="security-card main-card">
                     <div class="virustotal-logo">
                         <img src="https://www.virustotal.com/gui/images/manifest/icon-192x192.png" alt="VirusTotal" width="80" height="80">
@@ -1564,23 +1889,28 @@
                         <span class="scan-status">✓ 0/70+ detections</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="security-features">
-                    <div class="security-card small-card">
-                        <div class="security-icon-small">🏆</div>
-                        <h4>Trusted by 200+ Players</h4>
-                        <p>Active clan members use HT1 daily. No reports of issues, no malware, no problems. Just gaming.</p>
-                    </div>
-                    <div class="security-card small-card">
-                        <div class="security-icon-small">🔒</div>
-                        <h4>No Data Collection</h4>
-                        <p>We don't collect your passwords, game data, or personal info. Your privacy stays yours.</p>
-                    </div>
-                    <div class="security-card small-card">
-                        <div class="security-icon-small">⚡</div>
-                        <h4>Electron-Based</h4>
-                        <p>Built with the same tech as Discord, VS Code, and Slack. Trusted by millions.</p>
-                    </div>
+            <div class="security-features-row">
+                <div class="security-feature-box">
+                    <div class="security-feature-box-icon">🏆</div>
+                    <div class="security-feature-box-title">Trusted by 200+</div>
+                    <div class="security-feature-box-desc">Active members use HT1 daily. Zero issues reported.</div>
+                </div>
+                <div class="security-feature-box">
+                    <div class="security-feature-box-icon">🔒</div>
+                    <div class="security-feature-box-title">No Data Collection</div>
+                    <div class="security-feature-box-desc">No passwords, no game data, no personal info. Your privacy stays yours.</div>
+                </div>
+                <div class="security-feature-box">
+                    <div class="security-feature-box-icon">⚡</div>
+                    <div class="security-feature-box-title">Electron-Based</div>
+                    <div class="security-feature-box-desc">Same tech as Discord, VS Code, and Slack. Trusted by millions.</div>
+                </div>
+                <div class="security-feature-box">
+                    <div class="security-feature-box-icon">🛡️</div>
+                    <div class="security-feature-box-title">Anti-Cheat Protected</div>
+                    <div class="security-feature-box-desc">File integrity verified every launch. Tampered clients are flagged automatically.</div>
                 </div>
             </div>
 
