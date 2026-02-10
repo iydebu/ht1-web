@@ -507,6 +507,200 @@
         }
 
         /* ============================================
+           COMPONENT: Weapon Showcase (3D Rifle Section)
+           ============================================ */
+        .weapon-showcase-section {
+            background: var(--color-bg-base);
+            border-bottom: var(--border-default);
+        }
+
+        .weapon-showcase-section .split-visual {
+            position: relative;
+            overflow: hidden;
+            background: var(--color-bg-base);
+            padding: 0;
+        }
+
+        .rifle-canvas-wrapper {
+            position: relative;
+            width: 700px;
+            height: 500px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        #rifle-showcase-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+
+        #rifle-showcase-canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Game UI mockup overlay */
+        .rifle-ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .rifle-ui-equipped {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            font-weight: var(--weight-bold);
+            letter-spacing: var(--tracking-widest);
+            text-transform: uppercase;
+            color: var(--color-bg-base);
+            background: var(--color-primary);
+            padding: 4px 10px;
+        }
+
+        .rifle-ui-name {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-bold);
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--color-fg-primary);
+            text-shadow: 0 0 12px rgba(32, 217, 182, 0.4);
+        }
+
+        .rifle-ui-stats {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .rifle-stat {
+            flex: 1;
+        }
+
+        .rifle-stat-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: var(--tracking-widest);
+            text-transform: uppercase;
+            color: var(--color-fg-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .rifle-stat-bar {
+            height: 3px;
+            background: var(--color-fg-muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rifle-stat-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--color-primary);
+            transition: width 1s var(--ease-out);
+        }
+
+        .rifle-mockup-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--color-border);
+            pointer-events: none;
+        }
+
+        .rifle-mockup-frame::before,
+        .rifle-mockup-frame::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--color-primary-40);
+            border-style: solid;
+        }
+
+        .rifle-mockup-frame::before {
+            top: -1px;
+            left: -1px;
+            border-width: 1px 0 0 1px;
+        }
+
+        .rifle-mockup-frame::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 1px 1px 0;
+        }
+
+        .rifle-interact-hint {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--color-fg-tertiary);
+            opacity: 0.6;
+            animation: rifle-hint-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes rifle-hint-pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.2; }
+        }
+
+        /* Mobile fallback */
+        .rifle-mobile-fallback {
+            display: none;
+            text-align: center;
+            padding: var(--space-8);
+        }
+
+        .rifle-mobile-fallback-text {
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            color: var(--color-fg-tertiary);
+            letter-spacing: var(--tracking-wider);
+        }
+
+        .rifle-mobile-fallback-icon {
+            font-size: var(--text-3xl);
+            margin-bottom: var(--space-4);
+            opacity: 0.3;
+        }
+
+        @media (max-width: 968px) {
+            .weapon-showcase-section .rifle-canvas-wrapper {
+                display: none;
+            }
+            .weapon-showcase-section .rifle-ui-overlay {
+                display: none;
+            }
+            .rifle-mobile-fallback {
+                display: block;
+            }
+        }
+
+        /* ============================================
            COMPONENT: Visual Mockups
            ============================================ */
         .mockup-container {
@@ -2407,6 +2601,55 @@
         </div>
     </section>
 
+    <!-- Weapon Customization Showcase Section -->
+    <section class="weapon-showcase-section reveal-section" id="weapon-customization">
+        <div class="split-section">
+            <div class="split-content">
+                <span class="split-tag">> WEAPON_SHOWCASE</span>
+                <h2 class="split-title">Your Arsenal. Your Rules.</h2>
+                <p class="split-description">
+                    Haze Client puts you in control of your loadout. Browse custom weapon skins, inspect every detail, and equip what matches your playstyle.
+                    <br><br>
+                    Rotate the 3D model. Zoom in on the scope. This is what premium customization looks like -- built into the client, no mods required.
+                </p>
+                <div class="split-tagline">Inspect. Customize. Dominate.</div>
+            </div>
+            <div class="split-visual">
+                <div class="rifle-canvas-wrapper">
+                    <canvas id="rifle-showcase-canvas" width="700" height="500"></canvas>
+                    <div class="rifle-ui-overlay">
+                        <div class="rifle-ui-equipped">EQUIPPED</div>
+                        <div class="rifle-ui-name">TACTICAL SNIPER</div>
+                        <div class="rifle-ui-stats">
+                            <div class="rifle-stat">
+                                <div class="rifle-stat-label">Damage</div>
+                                <div class="rifle-stat-bar"><div class="rifle-stat-fill" style="width: 0%;" data-target="92"></div></div>
+                            </div>
+                            <div class="rifle-stat">
+                                <div class="rifle-stat-label">Range</div>
+                                <div class="rifle-stat-bar"><div class="rifle-stat-fill" style="width: 0%;" data-target="98"></div></div>
+                            </div>
+                            <div class="rifle-stat">
+                                <div class="rifle-stat-label">Accuracy</div>
+                                <div class="rifle-stat-bar"><div class="rifle-stat-fill" style="width: 0%;" data-target="85"></div></div>
+                            </div>
+                            <div class="rifle-stat">
+                                <div class="rifle-stat-label">Fire Rate</div>
+                                <div class="rifle-stat-bar"><div class="rifle-stat-fill" style="width: 0%;" data-target="35"></div></div>
+                            </div>
+                        </div>
+                        <div class="rifle-interact-hint">Click + Drag to Rotate</div>
+                        <div class="rifle-mockup-frame"></div>
+                    </div>
+                </div>
+                <div class="rifle-mobile-fallback">
+                    <div class="rifle-mobile-fallback-icon">&#127919;</div>
+                    <div class="rifle-mobile-fallback-text">> 3D weapon preview available on desktop</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Why Haze Section -->
     <section class="why-section">
         <!-- Block 1: Instant Team-Ups -->
@@ -2876,7 +3119,33 @@
             var s = document.createElement('script');
             s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
             s.defer = true;
-            s.onload = function() { window.threeJSReady = true; };
+            s.onload = function() {
+                window.threeJSReady = true;
+
+                // Load GLTFLoader for weapon showcase
+                var gltf = document.createElement('script');
+                gltf.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+                gltf.defer = true;
+                gltf.onload = function() {
+                    console.log('✅ GLTFLoader loaded');
+                    // Load OrbitControls for weapon showcase
+                    var orbit = document.createElement('script');
+                    orbit.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js';
+                    orbit.defer = true;
+                    orbit.onload = function() {
+                        console.log('✅ OrbitControls loaded');
+                        window.threeExtrasReady = true;
+                    };
+                    orbit.onerror = function() {
+                        console.error('❌ Failed to load OrbitControls');
+                    };
+                    document.head.appendChild(orbit);
+                };
+                gltf.onerror = function() {
+                    console.error('❌ Failed to load GLTFLoader');
+                };
+                document.head.appendChild(gltf);
+            };
             document.head.appendChild(s);
         }
     </script>
@@ -3299,6 +3568,291 @@
             // --- Boot ---
             window.addEventListener('load', init);
         })();
+    </script>
+
+    <!-- ==========================================
+         Weapon Showcase: 3D Rifle Scene
+         Lazy-loaded via IntersectionObserver
+         Separate renderer, does not conflict with bg/hero
+         ========================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // State
+        var rifleRenderer, rifleScene, rifleCamera, rifleControls;
+        var rifleModel = null;
+        var rifleAnimId = null;
+        var rifleInitialized = false;
+        var rifleVisible = false;
+
+        function initRifleShowcase() {
+            if (rifleInitialized) return;
+            if (typeof THREE === 'undefined') {
+                console.warn('🔫 THREE not loaded');
+                return;
+            }
+            if (typeof THREE.GLTFLoader === 'undefined') {
+                console.warn('🔫 GLTFLoader not loaded');
+                return;
+            }
+            if (typeof THREE.OrbitControls === 'undefined') {
+                console.warn('🔫 OrbitControls not loaded');
+                return;
+            }
+            console.log('🔫 Initializing rifle showcase...');
+
+            var canvas = document.getElementById('rifle-showcase-canvas');
+            if (!canvas) return;
+
+            rifleInitialized = true;
+
+            // --- Scene Setup ---
+            rifleScene = new THREE.Scene();
+
+            // Camera: FOV 45, positioned for rifle view
+            rifleCamera = new THREE.PerspectiveCamera(45, 700 / 500, 0.1, 100);
+            rifleCamera.position.set(2, 1.2, 3);
+            rifleCamera.lookAt(0, 0, 0);
+
+            // Renderer: separate from bg/hero, uses its own canvas
+            rifleRenderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: true,
+                powerPreference: 'high-performance'
+            });
+            rifleRenderer.setSize(700, 500);
+            rifleRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+            rifleRenderer.setClearColor(0x050505, 1);
+            rifleRenderer.outputEncoding = THREE.sRGBEncoding;
+            rifleRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            rifleRenderer.toneMappingExposure = 1.2;
+
+            // --- Lighting (Teal-Green Integration) ---
+            // Ambient: soft white fill
+            var ambientLight = new THREE.AmbientLight(0xEDEDED, 0.3);
+            rifleScene.add(ambientLight);
+
+            // Spotlight: teal-green from top-right
+            var spotLight = new THREE.SpotLight(0x20D9B6, 0.8, 20, Math.PI / 4, 0.5, 1);
+            spotLight.position.set(3, 4, 2);
+            spotLight.target.position.set(0, 0, 0);
+            rifleScene.add(spotLight);
+            rifleScene.add(spotLight.target);
+
+            // Point light: teal accent for scope/barrel highlights
+            var pointLight = new THREE.PointLight(0x20D9B6, 0.5, 8, 2);
+            pointLight.position.set(-1, 1, 2);
+            rifleScene.add(pointLight);
+
+            // Secondary fill light from opposite side (subtle warmth)
+            var fillLight = new THREE.DirectionalLight(0xffffff, 0.15);
+            fillLight.position.set(-2, 2, -1);
+            rifleScene.add(fillLight);
+
+            // --- OrbitControls ---
+            rifleControls = new THREE.OrbitControls(rifleCamera, canvas);
+            rifleControls.enableDamping = true;
+            rifleControls.dampingFactor = 0.08;
+            rifleControls.enableZoom = true;
+            rifleControls.minDistance = 1.5;
+            rifleControls.maxDistance = 6;
+            rifleControls.enablePan = false;
+            rifleControls.autoRotate = true;
+            rifleControls.autoRotateSpeed = 0.5; // ~1 full rotation per 60 seconds
+            rifleControls.target.set(0, 0, 0);
+
+            // --- Load GLTF Model ---
+            var loader = new THREE.GLTFLoader();
+            console.log('🔫 Attempting to load sniper model...');
+            loader.load(
+                './sniper.glb',
+                function(gltf) {
+                    console.log('🔫 Sniper model loaded successfully!', gltf);
+                    rifleModel = gltf.scene;
+
+                    // Center and scale the model
+                    var box = new THREE.Box3().setFromObject(rifleModel);
+                    var center = box.getCenter(new THREE.Vector3());
+                    var size = box.getSize(new THREE.Vector3());
+                    var maxDim = Math.max(size.x, size.y, size.z);
+                    var scale = 2.0 / maxDim; // Normalize to ~2 units
+
+                    rifleModel.scale.setScalar(scale);
+                    rifleModel.position.sub(center.multiplyScalar(scale));
+
+                    // Add emissive teal-green highlights to select materials
+                    rifleModel.traverse(function(child) {
+                        if (child.isMesh && child.material) {
+                            // Enable shadow receiving
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+
+                            // Clone material to avoid shared references
+                            if (Array.isArray(child.material)) {
+                                child.material = child.material.map(function(mat) {
+                                    var cloned = mat.clone();
+                                    // Add subtle emissive to metallic/darker parts
+                                    if (cloned.metalness && cloned.metalness > 0.5) {
+                                        cloned.emissive = new THREE.Color(0x20D9B6);
+                                        cloned.emissiveIntensity = 0.05;
+                                    }
+                                    return cloned;
+                                });
+                            } else {
+                                child.material = child.material.clone();
+                                if (child.material.metalness && child.material.metalness > 0.5) {
+                                    child.material.emissive = new THREE.Color(0x20D9B6);
+                                    child.material.emissiveIntensity = 0.05;
+                                }
+                            }
+                        }
+                    });
+
+                    rifleScene.add(rifleModel);
+
+                    // Animate stat bars once model is loaded
+                    animateStatBars();
+
+                    // Hide interaction hint after first drag
+                    canvas.addEventListener('pointerdown', function hideHint() {
+                        var hint = document.querySelector('.rifle-interact-hint');
+                        if (hint) hint.style.display = 'none';
+                        canvas.removeEventListener('pointerdown', hideHint);
+                    });
+                },
+                function(xhr) {
+                    console.log('🔫 Loading progress:', (xhr.loaded / xhr.total * 100).toFixed(2) + '%');
+                },
+                function(error) {
+                    console.error('🔫 FAILED to load sniper.glb:', error);
+                    console.error('Error details:', error.message || error);
+                }
+            );
+
+            // Start render loop
+            rifleVisible = true;
+            rifleLoop();
+        }
+
+        function animateStatBars() {
+            var fills = document.querySelectorAll('.rifle-stat-fill');
+            fills.forEach(function(fill) {
+                var target = fill.getAttribute('data-target');
+                if (target) {
+                    setTimeout(function() {
+                        fill.style.width = target + '%';
+                    }, 300);
+                }
+            });
+        }
+
+        function rifleLoop() {
+            if (!rifleVisible) return;
+            rifleAnimId = requestAnimationFrame(rifleLoop);
+
+            if (rifleControls) {
+                rifleControls.update();
+            }
+
+            if (rifleRenderer && rifleScene && rifleCamera) {
+                rifleRenderer.render(rifleScene, rifleCamera);
+            }
+        }
+
+        function pauseRifle() {
+            rifleVisible = false;
+            if (rifleAnimId) {
+                cancelAnimationFrame(rifleAnimId);
+                rifleAnimId = null;
+            }
+        }
+
+        function resumeRifle() {
+            if (!rifleInitialized) return;
+            if (rifleVisible) return;
+            rifleVisible = true;
+            rifleLoop();
+        }
+
+        // --- Lazy Loading via IntersectionObserver ---
+        function setupRifleObserver() {
+            console.log('🔫 Setting up rifle observer...');
+            var section = document.getElementById('weapon-customization');
+            if (!section) {
+                console.error('🔫 Section #weapon-customization not found!');
+                return;
+            }
+            console.log('🔫 Section found, creating observers...');
+
+            // Observe for lazy initialization (with rootMargin for preloading)
+            if (window.IntersectionObserver) {
+                // Init observer: triggers when section is 200px away from viewport
+                var initObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        initRifleShowcase();
+                        initObserver.disconnect();
+                    }
+                }, { rootMargin: '200px 0px' });
+                initObserver.observe(section);
+
+                // Visibility observer: pauses/resumes render loop
+                var visObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        resumeRifle();
+                    } else {
+                        pauseRifle();
+                    }
+                }, { threshold: 0.05 });
+                visObserver.observe(section);
+            }
+        }
+
+        // Handle responsive canvas sizing
+        function handleRifleResize() {
+            if (!rifleInitialized || !rifleRenderer || !rifleCamera) return;
+            var wrapper = document.querySelector('.rifle-canvas-wrapper');
+            if (!wrapper) return;
+
+            var w = Math.min(700, wrapper.parentElement.clientWidth);
+            var h = Math.round(w * (500 / 700));
+
+            rifleRenderer.setSize(w, h);
+            rifleCamera.aspect = w / h;
+            rifleCamera.updateProjectionMatrix();
+        }
+
+        var rifleResizeTimeout = null;
+        window.addEventListener('resize', function() {
+            clearTimeout(rifleResizeTimeout);
+            rifleResizeTimeout = setTimeout(handleRifleResize, 200);
+        }, { passive: true });
+
+        // --- Boot: Wait for Three.js + extras, then set up observer ---
+        var waitAttempts = 0;
+        function waitForExtras() {
+            waitAttempts++;
+            if (window.threeExtrasReady) {
+                console.log('🔫 Three.js extras ready, setting up observer...');
+                setupRifleObserver();
+            } else if (waitAttempts < 100) { // Max 10 seconds
+                setTimeout(waitForExtras, 100);
+            } else {
+                console.error('🔫 Timeout waiting for Three.js extras');
+            }
+        }
+
+        if (window.innerWidth >= 1024) {
+            console.log('🔫 Desktop detected, waiting for page load...');
+            window.addEventListener('load', function() {
+                console.log('🔫 Page loaded, waiting for Three.js extras...');
+                waitForExtras();
+            });
+        } else {
+            console.log('🔫 Mobile/tablet detected, rifle showcase disabled');
+        }
+    })();
     </script>
 
     <!-- ==========================================
