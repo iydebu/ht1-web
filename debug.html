@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three.js Debug Test</title>
+    <style>
+        body {
+            margin: 0;
+            background: #0a0e1a;
+            color: #00ff88;
+            font-family: monospace;
+            padding: 20px;
+        }
+        #info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border: 2px solid #00ff88;
+            z-index: 1000;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h2>Three.js Diagnostic Test</h2>
+        <p>Window Width: <span id="width"></span></p>
+        <p>WebGL Support: <span id="webgl"></span></p>
+        <p>Three.js Loaded: <span id="threejs"></span></p>
+        <p>Scene Status: <span id="status"></span></p>
+        <p>If you see a green spinning cube, Three.js works!</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Diagnostics
+        document.getElementById('width').textContent = window.innerWidth + 'px';
+
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        document.getElementById('webgl').textContent = gl ? 'YES ✓' : 'NO ✗';
+
+        document.getElementById('threejs').textContent = typeof THREE !== 'undefined' ? 'YES ✓' : 'NO ✗';
+
+        if (typeof THREE !== 'undefined' && gl) {
+            try {
+                // Create scene
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setClearColor(0x000000, 0);
+                document.body.appendChild(renderer.domElement);
+
+                // Create green wireframe cube
+                const geometry = new THREE.BoxGeometry(2, 2, 2);
+                const material = new THREE.MeshBasicMaterial({
+                    color: 0x00ff88,
+                    wireframe: true
+                });
+                const cube = new THREE.Mesh(geometry, material);
+                scene.add(cube);
+
+                camera.position.z = 5;
+
+                document.getElementById('status').textContent = 'RUNNING ✓';
+
+                // Animation
+                function animate() {
+                    requestAnimationFrame(animate);
+                    cube.rotation.x += 0.01;
+                    cube.rotation.y += 0.01;
+                    renderer.render(scene, camera);
+                }
+                animate();
+            } catch(e) {
+                document.getElementById('status').textContent = 'ERROR: ' + e.message;
+            }
+        } else {
+            document.getElementById('status').textContent = 'NOT STARTED - Missing requirements';
+        }
+    </script>
+</body>
+</html>

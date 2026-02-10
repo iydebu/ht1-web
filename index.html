@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HT1 Client V4.0 :: Dominate Deadshot.io</title>
+    <title>Haze Client V4.0 :: Dominate Deadshot.io</title>
 
     <!-- SEO -->
-    <meta name="description" content="HT1 Client — the ultimate Deadshot.io client. Custom weapon skins, instant team-ups, APEX performance mode, and runs on any PC. Download free for Windows.">
-    <meta name="keywords" content="deadshot.io, deadshot client, ht1 client, fps client, deadshot.io mods, deadshot.io skins, deadshot.io performance">
+    <meta name="description" content="Haze Client — the ultimate Deadshot.io client. Custom weapon skins, instant team-ups, APEX performance mode, and runs on any PC. Download free for Windows.">
+    <meta name="keywords" content="deadshot.io, deadshot client, haze client, fps client, deadshot.io mods, deadshot.io skins, deadshot.io performance">
     <meta name="author" content="Iydebu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ht1.iydebu.com/">
@@ -15,14 +15,14 @@
     <!-- Open Graph (Facebook, Discord, Slack, iMessage, etc.) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ht1.iydebu.com/">
-    <meta property="og:title" content="HT1 Client — Dominate Deadshot.io">
+    <meta property="og:title" content="Haze Client — Dominate Deadshot.io">
     <meta property="og:description" content="Custom weapon skins. Instant team-ups. APEX performance mode. The only Deadshot.io client built for winners.">
     <meta property="og:image" content="https://i.ibb.co/DfzgDt7x/image.png">
-    <meta property="og:site_name" content="HT1 Client">
+    <meta property="og:site_name" content="Haze Client">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HT1 Client — Dominate Deadshot.io">
+    <meta name="twitter:title" content="Haze Client — Dominate Deadshot.io">
     <meta name="twitter:description" content="Custom weapon skins. Instant team-ups. APEX performance mode. The only Deadshot.io client built for winners.">
     <meta name="twitter:image" content="https://i.ibb.co/DfzgDt7x/image.png">
 
@@ -60,7 +60,7 @@
             line-height: 1.6;
         }
 
-        /* Static Background Grid - No Animation */
+        /* Static Background Grid - CSS Fallback (shown on mobile, hidden on desktop when Three.js loads) */
         .background-grid {
             position: fixed;
             top: 0;
@@ -73,6 +73,15 @@
             background-size: 60px 60px;
             z-index: -2;
             pointer-events: none;
+        }
+
+        /* Three.js canvas transitions */
+        #haze-bg-canvas {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #hero-icosahedron-canvas {
+            transition: opacity 0.8s ease-in-out;
         }
 
         /* Navigation - No blur */
@@ -102,7 +111,27 @@
             font-weight: 700;
             color: var(--accent);
             letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+
+        .logo img {
+            height: 26px;
+            width: auto;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .hero-logo {
+            width: 90px;
+            height: auto;
+            display: block;
+            margin: 0 auto 32px;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.25));
+        }
+
+
 
         .nav-links {
             display: flex;
@@ -139,6 +168,7 @@
             text-align: center;
             padding: 120px 40px 80px;
             position: relative;
+            overflow: hidden;
             background: radial-gradient(ellipse at 50% 30%, rgba(0, 255, 136, 0.08) 0%, transparent 60%);
         }
 
@@ -238,7 +268,7 @@
             transform: translateY(-2px);
         }
 
-        /* Why HT1 Section - Split Screen */
+        /* Why Haze Section - Split Screen */
         .why-section {
             padding: 0;
         }
@@ -809,11 +839,6 @@
             line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            .security-grid {
-                grid-template-columns: 1fr;
-            }
-        }
 
         /* Download CTA Section */
         .download-cta {
@@ -896,6 +921,15 @@
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .footer-logo img {
+            height: 34px;
+            width: auto;
         }
 
         .footer-text {
@@ -1291,7 +1325,42 @@
             line-height: 1.6;
         }
 
-        /* Responsive */
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* Hide Three.js canvases on mobile/tablet (belt-and-suspenders with JS) */
+        @media (max-width: 1023px) {
+            #haze-bg-canvas,
+            #hero-icosahedron-canvas {
+                display: none !important;
+            }
+
+            .background-grid {
+                background-image:
+                    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+                background-size: 40px 40px;
+            }
+        }
+
+        /* Responsive — Tablet (968px) */
         @media (max-width: 968px) {
             .split-section {
                 grid-template-columns: 1fr;
@@ -1303,13 +1372,16 @@
                 padding: 60px 40px;
             }
             .split-visual {
-                min-height: 350px;
+                min-height: 300px;
             }
             .split-title {
                 font-size: 32px;
             }
+            .hero h1 {
+                font-size: 56px;
+            }
             .crosshair-preview {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
             .comparison-grid {
                 grid-template-columns: 1fr;
@@ -1318,54 +1390,159 @@
             .vs-divider {
                 padding: 10px 0;
             }
-            .features-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .apex-features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .security-features-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .features-row,
+            .apex-features-grid,
+            .security-features-row,
             .anticheat-features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .comparison-section,
+            .apex-section,
+            .security-section,
+            .anticheat-section,
+            .download-cta {
+                padding: 70px 30px;
+            }
+            .social-proof {
+                padding: 60px 30px;
+            }
         }
 
+        /* Responsive — Small Tablet / Large Phone (768px) */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 42px;
-            }
-            .hero .tagline {
-                font-size: 18px;
-            }
-            .section-title {
-                font-size: 32px;
+            /* Hamburger Nav */
+            .hamburger {
+                display: flex;
             }
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(10, 14, 26, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 28px;
+                z-index: 1000;
+                padding: 80px 40px;
             }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-links a {
+                font-size: 18px;
+            }
+            nav {
+                padding: 14px 0;
+            }
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            /* Hero */
+            .hero {
+                padding: 100px 24px 60px;
+                min-height: auto;
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            .hero .tagline {
+                font-size: 17px;
+            }
+            .hero .sub-tagline {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+            .hero-logo {
+                width: 70px;
+                margin: 0 auto 24px;
+            }
+            .version-badge {
+                padding: 8px 18px;
+                margin-bottom: 20px;
+            }
+            .version-badge span {
+                font-size: 12px;
+            }
+
+            /* Section headers */
+            .section-title {
+                font-size: 28px;
+            }
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            /* Split sections */
+            .split-content {
+                padding: 50px 24px;
+            }
+            .split-visual {
+                min-height: 280px;
+                padding: 40px 24px;
+            }
+            .split-title {
+                font-size: 28px;
+            }
+            .split-description {
+                font-size: 15px;
+            }
+            .split-tagline {
+                font-size: 13px;
+                padding: 12px 18px;
+            }
+
+            /* Sections padding */
+            .comparison-section,
+            .apex-section,
+            .security-section,
+            .anticheat-section,
+            .download-cta {
+                padding: 60px 20px;
+            }
+            .social-proof {
+                padding: 50px 20px;
+            }
+
+            /* Buttons */
             .download-btn-group {
                 flex-direction: column;
+                gap: 12px;
             }
             .btn {
                 width: 100%;
                 justify-content: center;
+                padding: 16px 32px;
+                font-size: 14px;
+            }
+
+            /* Stats / Proof */
+            .social-proof h2 {
+                font-size: 28px;
             }
             .social-proof-stats {
-                gap: 30px;
+                gap: 24px;
             }
             .proof-number {
                 font-size: 36px;
             }
+
+            /* Download CTA */
+            .download-cta h2 {
+                font-size: 32px;
+            }
+            .download-cta p {
+                font-size: 16px;
+            }
+
+            /* Crosshair */
             .crosshair-preview {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
-            }
-            .integrity-banner {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
             }
             .crosshair-item {
                 padding: 16px;
@@ -1373,42 +1550,519 @@
             .crosshair-icon {
                 font-size: 28px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .split-content {
+            /* Integrity banner */
+            .integrity-banner {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                margin: 0 20px 30px;
+            }
+
+            /* Security */
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+            .security-note {
+                margin: 30px 0 0;
+            }
+
+            /* Anticheat card */
+            .anticheat-status-card {
+                min-width: auto;
+                width: 100%;
+            }
+
+            /* Stats visual */
+            .stats-visual {
+                min-width: auto;
+                width: 100%;
+            }
+
+            /* Apex mockup */
+            .apex-badge-mockup {
+                min-width: auto;
+            }
+
+            /* Footer */
+            footer {
                 padding: 40px 20px;
             }
+            .footer-logo {
+                font-size: 18px;
+            }
+            .footer-logo img {
+                height: 28px;
+            }
+            .footer-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            /* Trust badges */
             .trust-badges {
                 flex-direction: column;
                 align-items: center;
             }
-            .crosshair-preview {
-                grid-template-columns: repeat(2, 1fr);
+
+            /* Platform badges */
+            .platform-badges {
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            .features-row {
-                grid-template-columns: 1fr;
+        }
+
+        /* Responsive — Phone (480px) */
+        @media (max-width: 480px) {
+            /* Hero */
+            .hero {
+                padding: 90px 16px 50px;
             }
-            .apex-features-grid {
-                grid-template-columns: 1fr;
+            .hero h1 {
+                font-size: 30px;
             }
-            .security-features-row {
-                grid-template-columns: 1fr;
+            .hero .tagline {
+                font-size: 15px;
             }
+            .hero .sub-tagline {
+                font-size: 14px;
+            }
+            .hero-logo {
+                width: 60px;
+                margin: 0 auto 20px;
+            }
+
+            /* Split */
+            .split-content {
+                padding: 36px 16px;
+            }
+            .split-visual {
+                min-height: 240px;
+                padding: 30px 16px;
+            }
+            .split-title {
+                font-size: 24px;
+            }
+            .split-description {
+                font-size: 14px;
+            }
+
+            /* Grids → single column */
+            .features-row,
+            .apex-features-grid,
+            .security-features-row,
             .anticheat-features-grid {
                 grid-template-columns: 1fr;
             }
+            .crosshair-preview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Section padding */
+            .comparison-section,
+            .apex-section,
+            .security-section,
+            .anticheat-section,
+            .download-cta {
+                padding: 40px 16px;
+            }
+            .social-proof {
+                padding: 40px 16px;
+            }
+
+            /* Section titles */
+            .section-title {
+                font-size: 24px;
+            }
+            .social-proof h2 {
+                font-size: 24px;
+            }
+            .download-cta h2 {
+                font-size: 26px;
+            }
+            .download-cta p {
+                font-size: 14px;
+                margin-bottom: 28px;
+            }
+
+            /* Proof stats */
+            .proof-number {
+                font-size: 30px;
+            }
+            .proof-label {
+                font-size: 13px;
+            }
+
+            /* Comparison */
+            .comparison-card {
+                padding: 24px 20px;
+            }
+
+            /* Logo */
+            .logo {
+                font-size: 18px;
+                gap: 8px;
+            }
+            .logo img {
+                height: 22px;
+            }
+
+            /* Version info */
+            .version-info {
+                font-size: 12px;
+            }
+
+            /* Footer */
+            .footer-logo {
+                font-size: 16px;
+                gap: 8px;
+            }
+            .footer-logo img {
+                height: 24px;
+            }
+            .footer-text {
+                font-size: 14px;
+            }
+            .footer-links {
+                gap: 16px;
+                font-size: 14px;
+            }
+            .copyright {
+                font-size: 12px;
+            }
         }
+        /* ============================================
+           ANIMATION 1: Crosshair Custom Cursor
+           ============================================ */
+        .crosshair-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform;
+            mix-blend-mode: difference;
+        }
+
+        .crosshair-cursor::before,
+        .crosshair-cursor::after {
+            content: '';
+            position: absolute;
+            background: var(--accent);
+            transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+        }
+
+        /* Horizontal line */
+        .crosshair-cursor::before {
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 2px;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Vertical line */
+        .crosshair-cursor::after {
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Outer ring */
+        .crosshair-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.5;
+            will-change: transform;
+            transition: width 0.25s ease-out, height 0.25s ease-out, opacity 0.25s ease-out, border-color 0.25s ease-out;
+        }
+
+        /* Expand on hoverable elements */
+        .crosshair-ring.hovering {
+            width: 56px;
+            height: 56px;
+            opacity: 0.8;
+            border-color: #fff;
+        }
+
+        /* Shrink on click */
+        .crosshair-ring.clicking {
+            width: 24px;
+            height: 24px;
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
+        .crosshair-cursor.clicking::before {
+            transform: translate(-50%, -50%) scaleX(0.6);
+        }
+
+        .crosshair-cursor.clicking::after {
+            transform: translate(-50%, -50%) scaleY(0.6);
+        }
+
+        /* Hide default cursor on desktop */
+        @media (min-width: 1024px) {
+            body.custom-cursor,
+            body.custom-cursor * {
+                cursor: none !important;
+            }
+        }
+
+        /* Hide custom cursor on mobile/tablet */
+        @media (max-width: 1023px) {
+            .crosshair-cursor,
+            .crosshair-ring {
+                display: none !important;
+            }
+        }
+
+        /* ============================================
+           ANIMATION 2: Scroll Section Reveals
+           ============================================ */
+        .reveal-section {
+            opacity: 0;
+            clip-path: inset(0 0 0 100%);
+            will-change: opacity, clip-path;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-section.revealed {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Green scan line edge effect */
+        .reveal-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                var(--accent) 20%,
+                var(--accent) 80%,
+                transparent 100%
+            );
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity 0.4s ease-out;
+            box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(0, 255, 136, 0.3);
+            z-index: 2;
+        }
+
+        .reveal-section.scanning::after {
+            opacity: 1;
+            animation: scanLineSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes scanLineSlide {
+            0% {
+                right: 0%;
+                opacity: 1;
+            }
+            100% {
+                right: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Stagger children reveals */
+        .reveal-section .split-content,
+        .reveal-section .split-visual,
+        .reveal-section .section-header,
+        .reveal-section .comparison-grid,
+        .reveal-section .features-row,
+        .reveal-section .apex-features-grid,
+        .reveal-section .security-grid,
+        .reveal-section .anticheat-features-grid,
+        .reveal-section .security-features-row {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal-section.revealed .split-content,
+        .reveal-section.revealed .split-visual,
+        .reveal-section.revealed .section-header,
+        .reveal-section.revealed .comparison-grid,
+        .reveal-section.revealed .features-row,
+        .reveal-section.revealed .apex-features-grid,
+        .reveal-section.revealed .security-grid,
+        .reveal-section.revealed .anticheat-features-grid,
+        .reveal-section.revealed .security-features-row {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-section.revealed .split-visual,
+        .reveal-section.revealed .comparison-grid,
+        .reveal-section.revealed .features-row,
+        .reveal-section.revealed .apex-features-grid,
+        .reveal-section.revealed .security-grid,
+        .reveal-section.revealed .anticheat-features-grid,
+        .reveal-section.revealed .security-features-row {
+            transition-delay: 0.2s;
+        }
+
+        /* ============================================
+           ANIMATION 3: Glitch Hover on CTA Buttons
+           ============================================ */
+        .btn-glitch {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glitch::before,
+        .btn-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Red channel (left shift) */
+        .btn-glitch::before {
+            color: #ff0040;
+            z-index: 1;
+        }
+
+        /* Cyan channel (right shift) */
+        .btn-glitch::after {
+            color: #00ffff;
+            z-index: 1;
+        }
+
+        .btn-glitch:hover::before {
+            opacity: 0.8;
+            animation: glitchLeft 0.4s steps(2, end) infinite;
+        }
+
+        .btn-glitch:hover::after {
+            opacity: 0.8;
+            animation: glitchRight 0.4s steps(2, end) infinite;
+        }
+
+        .btn-glitch:hover {
+            animation: glitchBase 0.3s steps(3, end) infinite;
+        }
+
+        @keyframes glitchLeft {
+            0%   { transform: translate(-3px, 0); clip-path: inset(20% 0 40% 0); }
+            25%  { transform: translate(2px, -1px); clip-path: inset(60% 0 10% 0); }
+            50%  { transform: translate(-2px, 1px); clip-path: inset(10% 0 70% 0); }
+            75%  { transform: translate(3px, 0); clip-path: inset(40% 0 20% 0); }
+            100% { transform: translate(-1px, -1px); clip-path: inset(80% 0 5% 0); }
+        }
+
+        @keyframes glitchRight {
+            0%   { transform: translate(3px, 0); clip-path: inset(50% 0 20% 0); }
+            25%  { transform: translate(-2px, 1px); clip-path: inset(10% 0 60% 0); }
+            50%  { transform: translate(2px, -1px); clip-path: inset(30% 0 30% 0); }
+            75%  { transform: translate(-3px, 0); clip-path: inset(70% 0 10% 0); }
+            100% { transform: translate(1px, 1px); clip-path: inset(5% 0 80% 0); }
+        }
+
+        @keyframes glitchBase {
+            0%   { transform: translateY(-2px) skewX(-1deg); }
+            33%  { transform: translateY(0px) skewX(0deg); }
+            66%  { transform: translateY(1px) skewX(0.5deg); }
+            100% { transform: translateY(-1px) skewX(-0.5deg); }
+        }
+
+        /* Scanline overlay on glitch buttons */
+        .btn-glitch .glitch-scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 136, 0.03) 2px,
+                rgba(0, 255, 136, 0.03) 4px
+            );
+            pointer-events: none;
+            opacity: 0;
+            z-index: 2;
+            transition: opacity 0.2s ease-out;
+        }
+
+        .btn-glitch:hover .glitch-scanlines {
+            opacity: 1;
+        }
+
+        /* ============================================
+           ANIMATION 5: Stats Counter Animation
+           ============================================ */
+        .proof-number[data-count] {
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes counterPulse {
+            0%   { text-shadow: 0 0 0px var(--accent); }
+            50%  { text-shadow: 0 0 16px var(--accent), 0 0 32px rgba(0, 255, 136, 0.3); }
+            100% { text-shadow: 0 0 0px var(--accent); }
+        }
+
+        .proof-number.counting {
+            animation: counterPulse 0.8s ease-out;
+        }
+
     </style>
 </head>
 <body>
-    <!-- Background Grid -->
-    <div class="background-grid"></div>
+    <!-- Custom Crosshair Cursor (desktop only) -->
+    <div class="crosshair-cursor" id="crosshair-cursor"></div>
+    <div class="crosshair-ring" id="crosshair-ring"></div>
+
+    <!-- Three.js Canvas Container (replaces .background-grid on desktop) -->
+    <canvas id="haze-bg-canvas" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+        display: none;
+    "></canvas>
+
+    <!-- CSS Grid Fallback (shown on mobile, hidden on desktop when Three.js loads) -->
+    <div class="background-grid" id="css-grid-fallback"></div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">[HT1] CLIENT</div>
+            <div class="logo"><img src="logo.png" alt="Haze">HAZE CLIENT</div>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#apex">> APEX MODE</a></li>
                 <li><a href="#features">> FEATURES</a></li>
@@ -1422,7 +2076,21 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
+        <!-- Icosahedron render target (desktop only, positioned behind hero-content) -->
+        <canvas id="hero-icosahedron-canvas" style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 0;
+        "></canvas>
+
+        <div class="hero-content" style="position: relative; z-index: 1;">
+            <img src="logo.png" alt="Haze Client" class="hero-logo">
             <div class="version-badge">
                 <div class="dot"></div>
                 <span>V4.0 NOW LIVE</span>
@@ -1430,8 +2098,9 @@
             <h1>Dominate Deadshot.io</h1>
             <p class="tagline">The only client built for winners.</p>
             <p class="sub-tagline">Custom weapon skins. Instant team-ups. Runs on any PC. Now with APEX Mode.</p>
+
             <div class="hero-cta">
-                <a href="#download" class="btn btn-primary download-btn">> DOWNLOAD V4.0</a>
+                <a href="#download" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD V4.0"><span class="glitch-scanlines"></span>> DOWNLOAD V4.0</a>
             </div>
         </div>
     </section>
@@ -1483,7 +2152,7 @@
                 <div class="apex-feature-card">
                     <div class="apex-feature-icon">📸</div>
                     <div class="apex-feature-title">Branded Screenshot</div>
-                    <div class="apex-feature-desc">Capture gameplay moments with HT1 branding built in.</div>
+                    <div class="apex-feature-desc">Capture gameplay moments with Haze branding built in.</div>
                 </div>
                 <div class="apex-feature-card">
                     <div class="apex-feature-icon">⚙</div>
@@ -1499,7 +2168,7 @@
         </div>
     </section>
 
-    <!-- Why HT1 Section -->
+    <!-- Why Haze Section -->
     <section class="why-section">
         <!-- Block 1: Instant Team-Ups -->
         <div class="split-section">
@@ -1509,7 +2178,7 @@
                 <p class="split-description">
                     Other clients make you copy game links, alt-tab to Discord, paste them, and wait. By the time your teammate joins, the match is already over.
                     <br><br>
-                    HT1 Client changes everything. See who's online, click their name, and they're in your game. No links. No Discord. No waiting.
+                    Haze Client changes everything. See who's online, click their name, and they're in your game. No links. No Discord. No waiting.
                 </p>
                 <div class="split-tagline">While others alt-tab, you're already winning.</div>
             </div>
@@ -1527,7 +2196,7 @@
                                 <div class="user">
                                     <div class="avatar">RK</div>
                                     <div>
-                                        <div class="name">[HT1] RavenKing</div>
+                                        <div class="name">[HAZE] RavenKing</div>
                                         <div class="status">Playing now</div>
                                     </div>
                                 </div>
@@ -1537,7 +2206,7 @@
                                 <div class="user">
                                     <div class="avatar">SH</div>
                                     <div>
-                                        <div class="name">[HT1] ShadowX</div>
+                                        <div class="name">[HAZE] ShadowX</div>
                                         <div class="status">In menu</div>
                                     </div>
                                 </div>
@@ -1547,7 +2216,7 @@
                                 <div class="user">
                                     <div class="avatar">NX</div>
                                     <div>
-                                        <div class="name">[HT1] NeonX</div>
+                                        <div class="name">[HAZE] NeonX</div>
                                         <div class="status">Playing now</div>
                                     </div>
                                 </div>
@@ -1609,7 +2278,7 @@
                 <span class="split-tag">> PERFORMANCE</span>
                 <h2 class="split-title">Runs on Any PC</h2>
                 <p class="split-description">
-                    HT1 Client is built lightweight. Whether you're on a GTX 1050 or integrated graphics, our auto-optimization detects your hardware and configures the best settings. Real-time stats overlay shows FPS, ping, and CPU usage without slowing you down.
+                    Haze Client is built lightweight. Whether you're on a GTX 1050 or integrated graphics, our auto-optimization detects your hardware and configures the best settings. Real-time stats overlay shows FPS, ping, and CPU usage without slowing you down.
                     <br><br>
                     Zero added latency. Minimal resource usage. Every frame counts.
                 </p>
@@ -1649,13 +2318,13 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">> THE_DIFFERENCE</span>
-                <h2 class="section-title">Why Players Switch to HT1</h2>
+                <h2 class="section-title">Why Players Switch to Haze</h2>
             </div>
 
             <div class="comparison-grid">
-                <!-- Without HT1 -->
+                <!-- Without Haze -->
                 <div class="comparison-card">
-                    <h3>Without HT1 Client</h3>
+                    <h3>Without Haze Client</h3>
                     <ul class="comparison-list">
                         <li>
                             <span class="comparison-icon">❌</span>
@@ -1689,9 +2358,9 @@
                     <div class="vs-badge">VS</div>
                 </div>
 
-                <!-- With HT1 -->
+                <!-- With Haze -->
                 <div class="comparison-card highlighted">
-                    <h3>With HT1 Client</h3>
+                    <h3>With Haze Client</h3>
                     <ul class="comparison-list">
                         <li>
                             <span class="comparison-icon">✅</span>
@@ -1751,19 +2420,19 @@
     <section class="social-proof">
         <div class="social-proof-content">
             <h2>Join <span style="color: var(--accent);">200+</span> Elite Members</h2>
-            <p style="color: var(--text-dim); font-size: 17px;">The most active Deadshot.io clan trusts HT1 Client</p>
+            <p style="color: var(--text-dim); font-size: 17px;">The most active Deadshot.io clan trusts Haze Client</p>
 
             <div class="social-proof-stats">
                 <div class="proof-stat">
-                    <div class="proof-number">200+</div>
+                    <div class="proof-number" data-count="200" data-suffix="+">0+</div>
                     <div class="proof-label">Active Members</div>
                 </div>
                 <div class="proof-stat">
-                    <div class="proof-number">24/7</div>
+                    <div class="proof-number" data-count="24" data-suffix="/7" data-static="true">24/7</div>
                     <div class="proof-label">Auto Updates</div>
                 </div>
                 <div class="proof-stat">
-                    <div class="proof-number">0ms</div>
+                    <div class="proof-number" data-count="0" data-suffix="ms">0ms</div>
                     <div class="proof-label">Added Latency</div>
                 </div>
             </div>
@@ -1807,7 +2476,7 @@
                     <span class="split-tag">> FILE_INTEGRITY</span>
                     <h2 class="split-title">Server-Verified. Can't Be Faked.</h2>
                     <p class="split-description">
-                        Every time you launch HT1 Client, the server picks random files from your install and asks your client to hash them. The hashes are compared server-side — any mismatch gets flagged instantly.
+                        Every time you launch Haze Client, the server picks random files from your install and asks your client to hash them. The hashes are compared server-side — any mismatch gets flagged instantly.
                         <br><br>
                         Modified a single byte? The system catches it. No one can cheat and claim they're clean — the server does the proving.
                     </p>
@@ -1895,7 +2564,7 @@
                 <div class="security-feature-box">
                     <div class="security-feature-box-icon">🏆</div>
                     <div class="security-feature-box-title">Trusted by 200+</div>
-                    <div class="security-feature-box-desc">Active members use HT1 daily. Zero issues reported.</div>
+                    <div class="security-feature-box-desc">Active members use Haze daily. Zero issues reported.</div>
                 </div>
                 <div class="security-feature-box">
                     <div class="security-feature-box-icon">🔒</div>
@@ -1925,11 +2594,11 @@
     <section class="download-cta" id="download">
         <div class="download-cta-content">
             <h2>Ready to <span style="color: var(--accent);">dominate</span>?</h2>
-            <p>Download HT1 Client V4.0 and join the elite.</p>
+            <p>Download Haze Client V4.0 and join the elite.</p>
 
             <div class="download-btn-group">
-                <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary download-btn">> DOWNLOAD FOR WINDOWS</a>
-                <a href="https://discord.gg/Asa9QvFKJq" target="_blank" class="btn btn-discord">> JOIN DISCORD</a>
+                <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD FOR WINDOWS"><span class="glitch-scanlines"></span>> DOWNLOAD FOR WINDOWS</a>
+                <a href="https://discord.gg/Asa9QvFKJq" target="_blank" class="btn btn-discord btn-glitch" data-text="> JOIN DISCORD"><span class="glitch-scanlines"></span>> JOIN DISCORD</a>
             </div>
 
             <p class="version-info">
@@ -1947,31 +2616,729 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">[HT1] CLIENT V4.0</div>
-            <p class="footer-text">Elite Deadshot.io gaming client for [HT1] clan members.</p>
+            <div class="footer-logo"><img src="logo.png" alt="Haze">HAZE CLIENT V4.0</div>
+            <p class="footer-text">Elite Deadshot.io gaming client for Haze clan members.</p>
             <div class="footer-links">
                 <a href="https://github.com/iydebu/HT1-Client-Releases" target="_blank">GitHub</a>
+
                 <a href="https://discord.gg/Asa9QvFKJq" target="_blank">Discord</a>
                 <a href="https://deadshot.io" target="_blank">Deadshot.io</a>
             </div>
             <div class="copyright">
-                <p><span style="color: var(--accent);">></span> 2026 HT1 Client. Built with <span style="color: var(--accent);">♥</span> for the [HT1] clan.</p>
-                <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. For [HT1] clan members only.</p>
+                <p><span style="color: var(--accent);">></span> 2026 Haze Client. Built with <span style="color: var(--accent);">♥</span> for the Haze clan.</p>
+                <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. For Haze clan members only.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Conditional Three.js CDN loader: only inject on desktop-class devices -->
     <script>
-        // Smooth Scroll only
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (window.innerWidth >= 1024) {
+            var s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            s.defer = true;
+            s.onload = function() { window.threeJSReady = true; };
+            document.head.appendChild(s);
+        }
+    </script>
+
+    <script>
+        // ==========================================
+        // Smooth Scroll (always active)
+        // ==========================================
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                var target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // ==========================================
+        // HAZE CLIENT -- Three.js Background System
+        // Architecture: Modified Hybrid
+        // Two-renderer system: background + hero
+        // ==========================================
+        (function() {
+            'use strict';
+
+            // --- GLSL Shaders (embedded as template literals) ---
+            var GRID_VERTEX_SHADER = [
+                'varying vec2 vUv;',
+                'varying float vDistFromCenter;',
+                '',
+                'void main() {',
+                '    vUv = uv;',
+                '    vDistFromCenter = length(position.xz);',
+                '    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+                '}'
+            ].join('\n');
+
+            var GRID_FRAGMENT_SHADER = [
+                'precision mediump float;',
+                '',
+                'uniform float uTime;',
+                'uniform vec2 uMouse;',
+                'uniform float uScrollY;',
+                '',
+                'varying vec2 vUv;',
+                'varying float vDistFromCenter;',
+                '',
+                'float gridLine(float coord, float lineWidth) {',
+                '    float halfWidth = lineWidth * 0.5;',
+                '    float d = abs(fract(coord - 0.5) - 0.5);',
+                '    return 1.0 - smoothstep(halfWidth - 0.01, halfWidth + 0.01, d);',
+                '}',
+                '',
+                'void main() {',
+                '    float gridScale = 20.0;',
+                '    float lineWidth = 0.03;',
+                '',
+                '    vec2 gridUv = vUv * gridScale;',
+                '    float lineX = gridLine(gridUv.x, lineWidth);',
+                '    float lineY = gridLine(gridUv.y, lineWidth);',
+                '    float grid = max(lineX, lineY);',
+                '',
+                '    vec3 accentColor = vec3(0.0, 1.0, 0.533);',
+                '',
+                '    vec2 mouseUv = (uMouse + 1.0) * 0.5;',
+                '    float mouseDist = distance(vUv, mouseUv);',
+                '    float mouseGlow = smoothstep(0.4, 0.0, mouseDist) * 0.15;',
+                '',
+                '    float wave = sin(vUv.y * 6.2832 + uTime * 0.5 + uScrollY * 3.0) * 0.02;',
+                '    float edgeFade = smoothstep(15.0, 8.0, vDistFromCenter);',
+                '',
+                '    float baseAlpha = 0.04;',
+                '    float alpha = (grid * baseAlpha + mouseGlow + wave * 0.01) * edgeFade;',
+                '',
+                '    gl_FragColor = vec4(accentColor, alpha);',
+                '}'
+            ].join('\n');
+
+            // --- State ---
+            var animFrameId = null;
+            var bgRenderer, bgScene, bgCamera;
+            var heroRenderer, heroScene, heroCamera;
+            var gridMaterial, particles, icosahedron;
+            var mouseX = 0, mouseY = 0;
+            var normalizedScroll = 0;
+            var isHeroVisible = true;
+            var isActive = false;
+
+            // --- FPS Monitor ---
+            var fpsFrames = 0, fpsLastTime = 0, fpsLowCount = 0;
+
+            function fpsMonitorTick() {
+                fpsFrames++;
+                var now = performance.now();
+                if (now - fpsLastTime >= 1000) {
+                    var fps = fpsFrames;
+                    fpsFrames = 0;
+                    fpsLastTime = now;
+                    if (fps < 30) {
+                        fpsLowCount++;
+                        if (fpsLowCount >= 3) teardown();
+                    } else {
+                        fpsLowCount = 0;
+                    }
+                }
+            }
+
+            // --- Device Detection (2-gate system - relaxed) ---
+            function shouldEnable() {
+                // Gate 1: Screen width -- mobile/tablet gets CSS fallback
+                if (window.innerWidth < 1024) {
+                    console.log('❌ Three.js disabled: viewport too narrow (' + window.innerWidth + 'px)');
+                    return false;
+                }
+
+                // Gate 2: WebGL availability
+                try {
+                    var c = document.createElement('canvas');
+                    if (!(c.getContext('webgl2') || c.getContext('webgl'))) {
+                        console.log('❌ Three.js disabled: WebGL not supported');
+                        return false;
+                    }
+                } catch(e) {
+                    console.log('❌ Three.js disabled: WebGL error -', e.message);
+                    return false;
+                }
+
+                // Removed restrictive gates for testing:
+                // - Reduced motion check (too conservative)
+                // - Device memory check (not widely supported, too restrictive)
+                // - CPU core check (too restrictive for modern systems)
+
+                console.log('✅ Three.js ENABLED - viewport:', window.innerWidth + 'px', 'WebGL: YES');
+                return true;
+            }
+
+            // --- Initialization ---
+            function init() {
+                if (typeof THREE === 'undefined' || !shouldEnable()) return;
+
+                // Hide CSS grid, show Three.js canvas
+                document.getElementById('css-grid-fallback').style.display = 'none';
+                document.getElementById('haze-bg-canvas').style.display = 'block';
+
+                initBackground();
+                initHero();
+                initEvents();
+
+                isActive = true;
+                fpsLastTime = performance.now();
+                loop();
+            }
+
+            // --- Scene A: Background (full viewport) ---
+            function initBackground() {
+                var canvas = document.getElementById('haze-bg-canvas');
+
+                bgScene = new THREE.Scene();
+
+                bgCamera = new THREE.PerspectiveCamera(
+                    60,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    1000
+                );
+                bgCamera.position.set(0, 8, 12);
+                bgCamera.lookAt(0, 0, 0);
+
+                bgRenderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    antialias: false,
+                    alpha: true,
+                    powerPreference: 'high-performance'
+                });
+                bgRenderer.setSize(window.innerWidth, window.innerHeight);
+                bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                bgRenderer.setClearColor(0x000000, 0);
+
+                // --- Grid Plane with GLSL Shader ---
+                var gridGeo = new THREE.PlaneGeometry(40, 40, 1, 1);
+                gridGeo.rotateX(-Math.PI * 0.5);
+
+                gridMaterial = new THREE.ShaderMaterial({
+                    uniforms: {
+                        uTime:    { value: 0.0 },
+                        uMouse:   { value: new THREE.Vector2(0, 0) },
+                        uScrollY: { value: 0.0 }
+                    },
+                    vertexShader: GRID_VERTEX_SHADER,
+                    fragmentShader: GRID_FRAGMENT_SHADER,
+                    transparent: true,
+                    depthWrite: false,
+                    side: THREE.DoubleSide
+                });
+
+                bgScene.add(new THREE.Mesh(gridGeo, gridMaterial));
+
+                // --- Particle System (crisp digital dots) ---
+                var PARTICLE_COUNT = 200;
+                var pGeo = new THREE.BufferGeometry();
+                var positions = new Float32Array(PARTICLE_COUNT * 3);
+                var velocities = new Float32Array(PARTICLE_COUNT * 3);
+
+                for (var i = 0; i < PARTICLE_COUNT; i++) {
+                    var i3 = i * 3;
+                    positions[i3]     = (Math.random() - 0.5) * 30;
+                    positions[i3 + 1] = Math.random() * 8 + 0.5;
+                    positions[i3 + 2] = (Math.random() - 0.5) * 30;
+
+                    velocities[i3]     = (Math.random() - 0.5) * 0.003;
+                    velocities[i3 + 1] = (Math.random() - 0.5) * 0.002;
+                    velocities[i3 + 2] = (Math.random() - 0.5) * 0.003;
+                }
+
+                pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                pGeo.userData.velocities = velocities;
+
+                // Sharp digital dots - no blur, crisp pixels matching wireframe aesthetic
+                var particleCanvas = document.createElement('canvas');
+                particleCanvas.width = 8;
+                particleCanvas.height = 8;
+                var ctx = particleCanvas.getContext('2d');
+                ctx.fillStyle = 'rgba(0, 255, 136, 1)';
+                ctx.fillRect(2, 2, 4, 4); // Small sharp square in center
+                var particleTexture = new THREE.CanvasTexture(particleCanvas);
+                particleTexture.minFilter = THREE.NearestFilter;
+                particleTexture.magFilter = THREE.NearestFilter;
+
+                var pMat = new THREE.PointsMaterial({
+                    color: 0x00ff88,
+                    size: 0.15,
+                    sizeAttenuation: true,
+                    transparent: true,
+                    opacity: 0.8,
+                    depthWrite: false,
+                    blending: THREE.AdditiveBlending,
+                    map: particleTexture
+                });
+
+                particles = new THREE.Points(pGeo, pMat);
+                bgScene.add(particles);
+            }
+
+            // --- Scene B: Hero Icosahedron (500x500 viewport) ---
+            function initHero() {
+                var canvas = document.getElementById('hero-icosahedron-canvas');
+                if (!canvas) return;
+                canvas.style.display = 'block';
+
+                heroScene = new THREE.Scene();
+
+                heroCamera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+                heroCamera.position.set(0, 0, 4);
+
+                heroRenderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    antialias: true,
+                    alpha: true,
+                    powerPreference: 'high-performance'
+                });
+                heroRenderer.setSize(500, 500);
+                heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                heroRenderer.setClearColor(0x000000, 0);
+
+                // Wireframe icosahedron (detail=1, 80 faces)
+                var icoGeo = new THREE.IcosahedronGeometry(1.5, 1);
+                var icoMat = new THREE.MeshBasicMaterial({
+                    color: 0x00ff88,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.25
+                });
+
+                icosahedron = new THREE.Mesh(icoGeo, icoMat);
+                heroScene.add(icosahedron);
+
+                // Fade-in after 500ms delay
+                setTimeout(function() {
+                    var op = 0;
+                    (function fade() {
+                        op += 0.02;
+                        canvas.style.opacity = Math.min(op, 0.6);
+                        if (op < 0.6) requestAnimationFrame(fade);
+                    })();
+                }, 500);
+            }
+
+            // --- Event Handlers ---
+            function initEvents() {
+                // Mouse tracking (throttled to ~60fps)
+                var mThrottle = null;
+                document.addEventListener('mousemove', function(e) {
+                    if (mThrottle) return;
+                    mThrottle = setTimeout(function() {
+                        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                        mThrottle = null;
+                    }, 16);
+                });
+
+                // Scroll tracking (throttled, passive)
+                var sThrottle = null;
+                window.addEventListener('scroll', function() {
+                    if (sThrottle) return;
+                    sThrottle = setTimeout(function() {
+                        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                        normalizedScroll = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+                        sThrottle = null;
+                    }, 16);
+                }, { passive: true });
+
+                // Resize handler (debounced 200ms)
+                var rTimeout = null;
+                window.addEventListener('resize', function() {
+                    clearTimeout(rTimeout);
+                    rTimeout = setTimeout(function() {
+                        if (window.innerWidth < 1024) {
+                            teardown();
+                            return;
+                        }
+                        bgCamera.aspect = window.innerWidth / window.innerHeight;
+                        bgCamera.updateProjectionMatrix();
+                        bgRenderer.setSize(window.innerWidth, window.innerHeight);
+                    }, 200);
+                }, { passive: true });
+
+                // Hero visibility gating via IntersectionObserver
+                var heroSection = document.querySelector('.hero');
+                if (heroSection && window.IntersectionObserver) {
+                    new IntersectionObserver(function(entries) {
+                        isHeroVisible = entries[0].isIntersecting;
+                        if (!isHeroVisible) {
+                            var hc = document.getElementById('hero-icosahedron-canvas');
+                            if (hc) hc.style.opacity = '0';
+                        }
+                    }, { threshold: 0.1 }).observe(heroSection);
+                }
+            }
+
+            // --- Animation Loop (unified for both scenes) ---
+            function loop() {
+                if (!isActive) return;
+                animFrameId = requestAnimationFrame(loop);
+
+                var time = performance.now() * 0.001;
+
+                // FPS monitoring
+                fpsMonitorTick();
+
+                // --- Scene A: Background (always renders) ---
+                gridMaterial.uniforms.uTime.value = time;
+                gridMaterial.uniforms.uMouse.value.set(mouseX, mouseY);
+                gridMaterial.uniforms.uScrollY.value = normalizedScroll;
+
+                // Animate particles (drift + boundary wrap)
+                var pa = particles.geometry.attributes.position.array;
+                var pv = particles.geometry.userData.velocities;
+                for (var i = 0, len = pa.length / 3; i < len; i++) {
+                    var j = i * 3;
+                    pa[j]     += pv[j];
+                    pa[j + 1] += pv[j + 1];
+                    pa[j + 2] += pv[j + 2];
+
+                    if (pa[j] > 15)      pa[j] = -15;
+                    if (pa[j] < -15)     pa[j] = 15;
+                    if (pa[j + 1] > 9)   pa[j + 1] = 0.5;
+                    if (pa[j + 1] < 0.5) pa[j + 1] = 9;
+                    if (pa[j + 2] > 15)  pa[j + 2] = -15;
+                    if (pa[j + 2] < -15) pa[j + 2] = 15;
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+
+                bgRenderer.render(bgScene, bgCamera);
+
+                // --- Scene B: Hero Icosahedron (only when hero visible) ---
+                if (isHeroVisible && icosahedron) {
+                    icosahedron.rotation.x = time * 0.15;
+                    icosahedron.rotation.y = time * 0.2;
+                    icosahedron.rotation.z = normalizedScroll * 0.3;
+
+                    var breathe = 1.0 + Math.sin(time * 0.8) * 0.03;
+                    icosahedron.scale.setScalar(breathe);
+
+                    heroRenderer.render(heroScene, heroCamera);
+                }
+            }
+
+            // --- Teardown / Killswitch ---
+            function teardown() {
+                isActive = false;
+                if (animFrameId) cancelAnimationFrame(animFrameId);
+
+                function disposeScene(scene) {
+                    if (!scene) return;
+                    scene.traverse(function(obj) {
+                        if (obj.geometry) obj.geometry.dispose();
+                        if (obj.material) {
+                            if (obj.material.map) obj.material.map.dispose();
+                            obj.material.dispose();
+                        }
+                    });
+                }
+
+                disposeScene(bgScene);
+                disposeScene(heroScene);
+                if (bgRenderer) bgRenderer.dispose();
+                if (heroRenderer) heroRenderer.dispose();
+
+                // Restore CSS fallback
+                var bgC = document.getElementById('haze-bg-canvas');
+                var hC = document.getElementById('hero-icosahedron-canvas');
+                var css = document.getElementById('css-grid-fallback');
+                if (bgC) bgC.style.display = 'none';
+                if (hC)  hC.style.display = 'none';
+                if (hC)  hC.style.opacity = '0';
+                if (css) css.style.display = 'block';
+            }
+
+            // --- Boot ---
+            window.addEventListener('load', init);
+        })();
+    </script>
+
+    <!-- ==========================================
+         Creative Animations System
+         5 production-ready animations:
+         1. Crosshair Cursor
+         2. Scroll Section Reveals
+         3. Glitch Hover (CSS-only, no JS needed)
+         4. Icosahedron Cursor Tilt
+         5. Stats Counter
+         ========================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ==========================================
+        // ANIMATION 1: Crosshair Custom Cursor
+        // GPU-accelerated via transform: translate3d
+        // ==========================================
+        var cursorEl = document.getElementById('crosshair-cursor');
+        var ringEl = document.getElementById('crosshair-ring');
+
+        if (cursorEl && ringEl && window.innerWidth >= 1024) {
+            document.body.classList.add('custom-cursor');
+
+            var cursorX = 0, cursorY = 0;
+            var ringX = 0, ringY = 0;
+            var targetX = 0, targetY = 0;
+
+            // Hoverable selectors for expansion effect
+            var hoverSelectors = 'a, button, .btn, .invite-btn, .crosshair-item, .feature-box, .apex-feature-card, .anticheat-feature-card, .security-feature-box, .trust-badge, .comparison-card';
+
+            document.addEventListener('mousemove', function(e) {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            }, { passive: true });
+
+            // Hover detection
+            document.addEventListener('mouseover', function(e) {
+                if (e.target.closest(hoverSelectors)) {
+                    ringEl.classList.add('hovering');
+                }
+            }, { passive: true });
+
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.closest(hoverSelectors)) {
+                    ringEl.classList.remove('hovering');
+                }
+            }, { passive: true });
+
+            // Click detection
+            document.addEventListener('mousedown', function() {
+                ringEl.classList.add('clicking');
+                cursorEl.classList.add('clicking');
+            });
+
+            document.addEventListener('mouseup', function() {
+                ringEl.classList.remove('clicking');
+                cursorEl.classList.remove('clicking');
+            });
+
+            // Animation loop for smooth cursor follow
+            function updateCursor() {
+                // Crosshair follows instantly
+                cursorX = targetX;
+                cursorY = targetY;
+                cursorEl.style.transform = 'translate3d(' + (cursorX - 16) + 'px, ' + (cursorY - 16) + 'px, 0)';
+
+                // Ring follows with easing (spring-like)
+                ringX += (targetX - ringX) * 0.15;
+                ringY += (targetY - ringY) * 0.15;
+                var ringW = ringEl.classList.contains('hovering') ? 56 : ringEl.classList.contains('clicking') ? 24 : 40;
+                var halfRing = ringW / 2;
+                ringEl.style.transform = 'translate3d(' + (ringX - halfRing) + 'px, ' + (ringY - halfRing) + 'px, 0)';
+
+                requestAnimationFrame(updateCursor);
+            }
+            requestAnimationFrame(updateCursor);
+
+            // Hide cursor when mouse leaves viewport
+            document.addEventListener('mouseleave', function() {
+                cursorEl.style.opacity = '0';
+                ringEl.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', function() {
+                cursorEl.style.opacity = '1';
+                ringEl.style.opacity = '0.5';
+            });
+        }
+
+        // ==========================================
+        // ANIMATION 2: Scroll Section Reveals
+        // IntersectionObserver + clip-path + scan line
+        // ==========================================
+        var revealSections = document.querySelectorAll('.reveal-section');
+
+        if (revealSections.length > 0 && window.IntersectionObserver) {
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        // Add scanning class first (green line sweeps)
+                        el.classList.add('scanning');
+                        // Then reveal the content
+                        requestAnimationFrame(function() {
+                            el.classList.add('revealed');
+                        });
+                        // Remove scan line after animation completes
+                        setTimeout(function() {
+                            el.classList.remove('scanning');
+                        }, 900);
+                        // Stop observing once revealed
+                        revealObserver.unobserve(el);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -60px 0px'
+            });
+
+            revealSections.forEach(function(section) {
+                // Ensure sections have relative positioning for scan line
+                section.style.position = section.style.position || 'relative';
+                section.style.overflow = 'hidden';
+                revealObserver.observe(section);
+
+                // IMPORTANT: Immediately reveal sections already in viewport on page load
+                var rect = section.getBoundingClientRect();
+                var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    // Section is already visible, reveal it immediately
+                    section.classList.add('scanning');
+                    requestAnimationFrame(function() {
+                        section.classList.add('revealed');
+                    });
+                    setTimeout(function() {
+                        section.classList.remove('scanning');
+                    }, 900);
+                    revealObserver.unobserve(section);
+                }
+            });
+        }
+
+        // ==========================================
+        // ANIMATION 4: Icosahedron Cursor Tilt
+        // Integrates with existing Three.js animation loop
+        // ==========================================
+        (function() {
+            // We need to patch into the existing Three.js icosahedron
+            // The existing code sets icosahedron rotation in its loop()
+            // We'll add mouse-based tilt by intercepting after Three.js loads
+
+            var tiltMouseX = 0, tiltMouseY = 0;
+            var smoothTiltX = 0, smoothTiltY = 0;
+
+            document.addEventListener('mousemove', function(e) {
+                // Normalize mouse position relative to hero section
+                var hero = document.querySelector('.hero');
+                if (!hero) return;
+                var rect = hero.getBoundingClientRect();
+                // Only compute tilt when hero is visible
+                if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+                tiltMouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+                tiltMouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            }, { passive: true });
+
+            // Patch into the existing animation loop
+            // We'll modify the icosahedron's rotation after the existing code runs
+            var originalRAF = window.requestAnimationFrame;
+            var patchApplied = false;
+
+            function tryPatchIcosahedron() {
+                // Wait for Three.js icosahedron to exist
+                if (patchApplied) return;
+                var canvas = document.getElementById('hero-icosahedron-canvas');
+                if (!canvas || canvas.style.display === 'none') {
+                    setTimeout(tryPatchIcosahedron, 500);
+                    return;
+                }
+
+                patchApplied = true;
+
+                // Create a secondary animation loop that adds tilt on top
+                function tiltLoop() {
+                    requestAnimationFrame(tiltLoop);
+
+                    // Smooth interpolation
+                    smoothTiltX += (tiltMouseX - smoothTiltX) * 0.05;
+                    smoothTiltY += (tiltMouseY - smoothTiltY) * 0.05;
+
+                    // Apply tilt to the canvas via CSS transform
+                    // This layers on top of the Three.js internal rotation
+                    var tiltX = smoothTiltY * 12; // degrees
+                    var tiltY = smoothTiltX * 12;
+                    canvas.style.transform = 'translate(-50%, -50%) perspective(600px) rotateX(' + (-tiltX) + 'deg) rotateY(' + tiltY + 'deg)';
+                }
+
+                tiltLoop();
+            }
+
+            // Start checking once page loads
+            window.addEventListener('load', function() {
+                setTimeout(tryPatchIcosahedron, 1000);
+            });
+        })();
+
+        // ==========================================
+        // ANIMATION 5: Stats Counter
+        // Count up when social proof enters viewport
+        // ==========================================
+        var counterElements = document.querySelectorAll('.proof-number[data-count]');
+
+        if (counterElements.length > 0 && window.IntersectionObserver) {
+            var countersTriggered = false;
+
+            var counterObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !countersTriggered) {
+                        countersTriggered = true;
+                        animateCounters();
+                        counterObserver.disconnect();
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            // Observe the social proof section
+            var socialProof = document.querySelector('.social-proof');
+            if (socialProof) {
+                counterObserver.observe(socialProof);
+            }
+        }
+
+        function animateCounters() {
+            counterElements.forEach(function(el) {
+                var isStatic = el.getAttribute('data-static') === 'true';
+                if (isStatic) {
+                    // Don't animate static values like "24/7"
+                    el.classList.add('counting');
+                    setTimeout(function() { el.classList.remove('counting'); }, 800);
+                    return;
+                }
+
+                var target = parseInt(el.getAttribute('data-count'), 10);
+                var suffix = el.getAttribute('data-suffix') || '';
+                var duration = 1600; // ms
+                var startTime = null;
+                var startValue = 0;
+
+                // Easing function: ease-out cubic
+                function easeOutCubic(t) {
+                    return 1 - Math.pow(1 - t, 3);
+                }
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    var elapsed = timestamp - startTime;
+                    var progress = Math.min(elapsed / duration, 1);
+                    var easedProgress = easeOutCubic(progress);
+                    var currentValue = Math.round(startValue + (target - startValue) * easedProgress);
+
+                    el.textContent = currentValue + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        // Final value
+                        el.textContent = target + suffix;
+                        el.classList.add('counting');
+                        setTimeout(function() { el.classList.remove('counting'); }, 800);
+                    }
+                }
+
+                requestAnimationFrame(step);
+            });
+        }
+
+    })();
     </script>
 </body>
 </html>
