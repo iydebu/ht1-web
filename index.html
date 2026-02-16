@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haze Client V4.0 :: Dominate Deadshot.io</title>
+    <title>Haze Client :: The #1 Deadshot.io Client</title>
 
     <!-- SEO -->
-    <meta name="description" content="Haze Client — the ultimate Deadshot.io client. Custom weapon skins, instant team-ups, APEX performance mode, and runs on any PC. Download free for Windows.">
-    <meta name="keywords" content="deadshot.io, deadshot client, haze client, fps client, deadshot.io mods, deadshot.io skins, deadshot.io performance">
+    <meta name="description" content="Haze Client — the #1 Deadshot.io client for everyone. Custom skin store, lobby chat, 30+ weapon skins, instant team-ups, and runs on any PC. Download free for Windows.">
+    <meta name="keywords" content="deadshot.io, deadshot client, haze client, fps client, deadshot.io mods, deadshot.io skins, deadshot.io performance, deadshot.io lobby chat, deadshot.io skin store">
     <meta name="author" content="Iydebu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ht1.iydebu.com/">
@@ -15,15 +15,15 @@
     <!-- Open Graph (Facebook, Discord, Slack, iMessage, etc.) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ht1.iydebu.com/">
-    <meta property="og:title" content="Haze Client — Dominate Deadshot.io">
-    <meta property="og:description" content="Custom weapon skins. Instant team-ups. APEX performance mode. The only Deadshot.io client built for winners.">
+    <meta property="og:title" content="Haze Client — The #1 Deadshot.io Client">
+    <meta property="og:description" content="The best Deadshot.io client for everyone. Lobby chat, custom skin store, 30+ weapon skins, instant team-ups, and custom crosshairs. Free download.">
     <meta property="og:image" content="https://i.ibb.co/DfzgDt7x/image.png">
     <meta property="og:site_name" content="Haze Client">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Haze Client — Dominate Deadshot.io">
-    <meta name="twitter:description" content="Custom weapon skins. Instant team-ups. APEX performance mode. The only Deadshot.io client built for winners.">
+    <meta name="twitter:title" content="Haze Client — The #1 Deadshot.io Client">
+    <meta name="twitter:description" content="The best Deadshot.io client for everyone. Lobby chat, custom skin store, 30+ weapon skins, instant team-ups, and custom crosshairs. Free download.">
     <meta name="twitter:image" content="https://i.ibb.co/DfzgDt7x/image.png">
 
     <!-- Theme -->
@@ -453,6 +453,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background: rgba(5, 5, 5, 0.85);
         }
 
         .split-section.reverse .split-content {
@@ -465,7 +466,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--color-bg-surface);
+            background: rgba(10, 10, 10, 0.85);
             height: 100%;
         }
 
@@ -510,14 +511,14 @@
            COMPONENT: Weapon Showcase (3D Rifle Section)
            ============================================ */
         .weapon-showcase-section {
-            background: var(--color-bg-base);
+            background: transparent;
             border-bottom: var(--border-default);
         }
 
         .weapon-showcase-section .split-visual {
             position: relative;
             overflow: hidden;
-            background: var(--color-bg-base);
+            background: rgba(5, 5, 5, 0.85);
             padding: 0;
         }
 
@@ -882,7 +883,7 @@
            ============================================ */
         .comparison-section {
             padding: var(--space-24) var(--space-10);
-            background: var(--color-bg-raised);
+            background: rgba(17, 17, 17, 0.85);
             border-top: var(--border-default);
             border-bottom: var(--border-default);
         }
@@ -1045,7 +1046,7 @@
         .social-proof {
             padding: var(--space-20) var(--space-10);
             text-align: center;
-            background: var(--color-bg-base);
+            background: rgba(5, 5, 5, 0.85);
             border-top: var(--border-default);
             border-bottom: var(--border-default);
         }
@@ -1138,7 +1139,7 @@
            ============================================ */
         .security-section {
             padding: var(--space-24) var(--space-10);
-            background: var(--color-bg-base);
+            background: rgba(5, 5, 5, 0.85);
             border-top: var(--border-default);
         }
 
@@ -1266,12 +1267,241 @@
 
 
         /* ============================================
+           SECTION: Lobby Chat
+           ============================================ */
+        .lobby-chat-section {
+            background: transparent;
+            border-bottom: var(--border-default);
+        }
+
+        .chat-mockup {
+            background: var(--color-bg-surface);
+            border: var(--border-default);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .chat-mockup-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-4) var(--space-5);
+            border-bottom: var(--border-default);
+        }
+
+        .chat-mockup-header .online-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: var(--radius-full);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .chat-mockup-header span {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            color: var(--color-fg-tertiary);
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+        }
+
+        .chat-mockup-messages {
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            min-height: 200px;
+        }
+
+        .chat-msg {
+            display: flex;
+            gap: var(--space-2);
+            align-items: flex-start;
+        }
+
+        .chat-msg .chat-author {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            font-weight: var(--weight-bold);
+            color: var(--color-primary);
+            white-space: nowrap;
+        }
+
+        .chat-msg .chat-text {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-fg-secondary);
+            line-height: var(--leading-snug);
+        }
+
+        .chat-mockup-input {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            border-top: var(--border-default);
+        }
+
+        .chat-mockup-input .chat-input-field {
+            flex: 1;
+            background: var(--color-bg-raised);
+            border: var(--border-default);
+            padding: var(--space-2) var(--space-3);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-fg-tertiary);
+        }
+
+        .chat-mockup-input .chat-send-btn {
+            background: var(--color-primary);
+            color: var(--color-bg-base);
+            border: none;
+            padding: var(--space-2) var(--space-3);
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            font-weight: var(--weight-bold);
+            letter-spacing: var(--tracking-wide);
+            cursor: pointer;
+        }
+
+        /* ============================================
+           SECTION: Skin Store
+           ============================================ */
+        .skin-store-section {
+            background: transparent;
+            border-bottom: var(--border-default);
+        }
+
+        .store-mockup {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .store-mockup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4) var(--space-5);
+            background: var(--color-bg-surface);
+            border: var(--border-default);
+            border-bottom: none;
+        }
+
+        .store-mockup-header span {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            color: var(--color-primary);
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            font-weight: var(--weight-bold);
+        }
+
+        .store-mockup-header .store-count {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            color: var(--color-fg-tertiary);
+            font-weight: var(--weight-normal);
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--color-border);
+            border: var(--border-default);
+        }
+
+        .store-skin-card {
+            background: var(--color-bg-surface);
+            padding: var(--space-5);
+            text-align: center;
+            transition: background var(--duration-normal) var(--ease-default);
+        }
+
+        .store-skin-card:hover {
+            background: var(--color-primary-5);
+        }
+
+        .store-skin-card.equipped {
+            background: var(--color-primary-5);
+            position: relative;
+        }
+
+        .store-skin-card.equipped::after {
+            content: 'EQUIPPED';
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: var(--weight-bold);
+            letter-spacing: var(--tracking-widest);
+            color: var(--color-bg-base);
+            background: var(--color-primary);
+            padding: 2px 6px;
+        }
+
+        .store-skin-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-2);
+        }
+
+        .store-skin-name {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            font-weight: var(--weight-semibold);
+            color: var(--color-fg-primary);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            margin-bottom: var(--space-1);
+        }
+
+        .store-skin-type {
+            font-family: var(--font-body);
+            font-size: 11px;
+            color: var(--color-fg-tertiary);
+        }
+
+        .store-download-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-5);
+            background: var(--color-bg-surface);
+            border: var(--border-default);
+            border-top: none;
+        }
+
+        .store-download-bar span {
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            color: var(--color-fg-tertiary);
+        }
+
+        .store-download-bar .store-dl-btn {
+            background: var(--color-primary);
+            color: var(--color-bg-base);
+            border: none;
+            padding: var(--space-1) var(--space-4);
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            font-weight: var(--weight-bold);
+            letter-spacing: var(--tracking-wide);
+            cursor: pointer;
+        }
+
+        /* ============================================
            SECTION: Download CTA
            ============================================ */
         .download-cta {
             padding: var(--space-24) var(--space-10);
             text-align: center;
-            background: linear-gradient(180deg, var(--color-bg-raised) 0%, var(--color-bg-base) 100%);
+            background: linear-gradient(180deg, rgba(17, 17, 17, 0.85) 0%, rgba(5, 5, 5, 0.85) 100%);
             border-top: var(--border-default);
         }
 
@@ -1341,7 +1571,7 @@
            ============================================ */
         footer {
             padding: var(--space-12) var(--space-10);
-            background: var(--color-bg-surface);
+            background: rgba(10, 10, 10, 0.90);
             border-top: var(--border-default);
             text-align: center;
         }
@@ -1400,139 +1630,6 @@
             font-size: var(--text-xs);
             padding-top: var(--space-6);
             border-top: var(--border-default);
-        }
-
-        /* ============================================
-           SECTION: Apex Mode
-           ============================================ */
-        .apex-section {
-            padding: var(--space-24) var(--space-10);
-            border-top: var(--border-default);
-            border-bottom: var(--border-default);
-            background: var(--color-bg-base);
-        }
-
-        .apex-visual-bg {
-            background: linear-gradient(135deg, var(--color-primary-5) 0%, var(--color-bg-raised) 50%, var(--color-primary-5) 100%);
-        }
-
-        .apex-mockup {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-6);
-        }
-
-        .apex-badge-mockup {
-            background: var(--color-bg-surface);
-            border: var(--border-default);
-            border-color: var(--color-primary-40);
-            padding: var(--space-5) var(--space-8);
-            text-align: center;
-            min-width: 220px;
-        }
-
-        .apex-badge-mockup .badge-label {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--color-fg-tertiary);
-            letter-spacing: var(--tracking-widest);
-            text-transform: uppercase;
-            margin-bottom: var(--space-2);
-        }
-
-        .apex-badge-mockup .badge-title {
-            font-family: var(--font-display);
-            font-size: var(--text-2xl);
-            font-weight: var(--weight-bold);
-            color: var(--color-primary);
-            letter-spacing: 6px;
-        }
-
-        .apex-badge-mockup .badge-status {
-            font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            color: var(--color-primary);
-            margin-top: var(--space-2);
-            opacity: 0.7;
-        }
-
-        .apex-screen-mockup {
-            background: var(--color-bg-surface);
-            border: var(--border-default);
-            padding: var(--space-6);
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .apex-fps-mockup {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: var(--space-3);
-            padding: var(--space-4);
-        }
-
-        .apex-fps-mockup .fps-label {
-            font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            color: var(--color-fg-tertiary);
-            letter-spacing: var(--tracking-wider);
-        }
-
-        .apex-fps-mockup .fps-value {
-            font-family: var(--font-display);
-            font-size: var(--text-4xl);
-            font-weight: var(--weight-bold);
-            color: var(--color-primary);
-            line-height: var(--leading-none);
-        }
-
-        .apex-fps-mockup .fps-unit {
-            font-family: var(--font-mono);
-            font-size: var(--text-xs);
-            color: var(--color-fg-tertiary);
-        }
-
-        .apex-features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-4);
-            margin-top: var(--space-16);
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .apex-feature-card {
-            background: var(--color-bg-surface);
-            border: var(--border-default);
-            padding: var(--space-6);
-            transition: border-color var(--duration-normal) var(--ease-default);
-        }
-
-        .apex-feature-card:hover {
-            border-color: var(--color-border-hover);
-        }
-
-        .apex-feature-icon {
-            font-size: 28px;
-            margin-bottom: var(--space-4);
-        }
-
-        .apex-feature-title {
-            font-family: var(--font-mono);
-            font-size: var(--text-sm);
-            font-weight: var(--weight-semibold);
-            color: var(--color-fg-primary);
-            margin-bottom: var(--space-2);
-        }
-
-        .apex-feature-desc {
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-            color: var(--color-fg-tertiary);
-            line-height: var(--leading-relaxed);
         }
 
         /* ============================================
@@ -1649,11 +1746,11 @@
         .anticheat-section {
             padding: var(--space-24) var(--space-10);
             border-top: var(--border-default);
-            background: var(--color-bg-base);
+            background: rgba(5, 5, 5, 0.85);
         }
 
         .anticheat-visual-bg {
-            background: linear-gradient(135deg, var(--color-primary-5) 0%, var(--color-bg-raised) 50%, var(--color-primary-5) 100%);
+            background: linear-gradient(135deg, rgba(32, 217, 182, 0.05) 0%, rgba(17, 17, 17, 0.85) 50%, rgba(32, 217, 182, 0.05) 100%);
         }
 
         .anticheat-mockup {
@@ -1858,13 +1955,11 @@
                 padding: var(--space-2) 0;
             }
             .features-row,
-            .apex-features-grid,
             .security-features-row,
             .anticheat-features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .comparison-section,
-            .apex-section,
             .security-section,
             .anticheat-section,
             .download-cta {
@@ -1967,7 +2062,6 @@
 
             /* Sections padding */
             .comparison-section,
-            .apex-section,
             .security-section,
             .anticheat-section,
             .download-cta {
@@ -2048,11 +2142,6 @@
                 width: 100%;
             }
 
-            /* Apex mockup */
-            .apex-badge-mockup {
-                min-width: auto;
-            }
-
             /* Footer */
             footer {
                 padding: var(--space-10) var(--space-5);
@@ -2121,7 +2210,6 @@
 
             /* Grids to single column */
             .features-row,
-            .apex-features-grid,
             .security-features-row,
             .anticheat-features-grid {
                 grid-template-columns: 1fr;
@@ -2132,7 +2220,6 @@
 
             /* Section padding */
             .comparison-section,
-            .apex-section,
             .security-section,
             .anticheat-section,
             .download-cta {
@@ -2322,10 +2409,11 @@
         .reveal-section .section-header,
         .reveal-section .comparison-grid,
         .reveal-section .features-row,
-        .reveal-section .apex-features-grid,
         .reveal-section .security-grid,
         .reveal-section .anticheat-features-grid,
-        .reveal-section .security-features-row {
+        .reveal-section .security-features-row,
+        .reveal-section .social-proof-content,
+        .reveal-section .download-cta-content {
             opacity: 0;
             transform: translateY(24px);
             transition: opacity var(--duration-slower) var(--ease-out),
@@ -2337,10 +2425,11 @@
         .reveal-section.revealed .section-header,
         .reveal-section.revealed .comparison-grid,
         .reveal-section.revealed .features-row,
-        .reveal-section.revealed .apex-features-grid,
         .reveal-section.revealed .security-grid,
         .reveal-section.revealed .anticheat-features-grid,
-        .reveal-section.revealed .security-features-row {
+        .reveal-section.revealed .security-features-row,
+        .reveal-section.revealed .social-proof-content,
+        .reveal-section.revealed .download-cta-content {
             opacity: 1;
             transform: translateY(0);
         }
@@ -2348,10 +2437,11 @@
         .reveal-section.revealed .split-visual,
         .reveal-section.revealed .comparison-grid,
         .reveal-section.revealed .features-row,
-        .reveal-section.revealed .apex-features-grid,
         .reveal-section.revealed .security-grid,
         .reveal-section.revealed .anticheat-features-grid,
-        .reveal-section.revealed .security-features-row {
+        .reveal-section.revealed .security-features-row,
+        .reveal-section.revealed .social-proof-content,
+        .reveal-section.revealed .download-cta-content {
             transition-delay: 100ms;
         }
 
@@ -2497,9 +2587,9 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="#apex">> APEX MODE</a></li>
+                <li><a href="#lobby-chat">> LOBBY CHAT</a></li>
+                <li><a href="#skin-store">> SKIN STORE</a></li>
                 <li><a href="#features">> FEATURES</a></li>
-                <li><a href="#anticheat">> ANTI-CHEAT</a></li>
                 <li><a href="#security">> SECURITY</a></li>
                 <li><a href="#download">> DOWNLOAD</a></li>
                 <li><a href="https://discord.gg/Asa9QvFKJq" target="_blank">> DISCORD</a></li>
@@ -2526,76 +2616,113 @@
             <img src="logo.png" alt="Haze Client" class="hero-logo">
             <div class="version-badge">
                 <div class="dot"></div>
-                <span>V4.0 NOW LIVE</span>
+                <span>V1.0 NOW LIVE</span>
             </div>
-            <h1>Dominate Deadshot.io</h1>
-            <p class="tagline">The only client built for winners.</p>
-            <p class="sub-tagline">Custom weapon skins. Instant team-ups. Runs on any PC. Now with APEX Mode.</p>
+            <h1>The #1 Deadshot.io Client</h1>
+            <p class="tagline">Built for every player. Not just clans.</p>
+            <p class="sub-tagline">Lobby chat. Custom skin store. 30+ weapon skins. Instant team-ups. Custom crosshairs. Free for everyone.</p>
 
             <div class="hero-cta">
-                <a href="#download" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD V4.0"><span class="glitch-scanlines"></span>> DOWNLOAD V4.0</a>
+                <a href="#download" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD V1.0"><span class="glitch-scanlines"></span>> DOWNLOAD V1.0</a>
             </div>
         </div>
     </section>
 
-    <!-- Apex Mode Section -->
-    <section class="apex-section" id="apex">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">> NEW_IN_V4.0</span>
-                <h2 class="section-title">Introducing APEX Mode</h2>
-                <p style="color: var(--color-fg-secondary); font-family: var(--font-body); font-size: var(--text-md); max-width: 600px; margin: 0 auto;">Pure performance. Zero distractions.</p>
+    <!-- Lobby Chat Section -->
+    <section class="lobby-chat-section reveal-section" id="lobby-chat">
+        <div class="split-section">
+            <div class="split-content">
+                <span class="split-tag">> LOBBY_CHAT</span>
+                <h2 class="split-title">Talk In-Game. No Alt-Tab.</h2>
+                <p class="split-description">
+                    Built-in lobby chat lets you talk to other Haze players without leaving the game. Coordinate strategies, call out enemies, or just hang out — all from inside the client.
+                    <br><br>
+                    No more switching to Discord mid-match. Your chat is right where the action is.
+                </p>
+                <div class="split-tagline">Real-time chat. Zero distractions. Stay in the game.</div>
             </div>
-
-            <div class="split-section">
-                <div class="split-content">
-                    <span class="split-tag">> APEX_MODE</span>
-                    <h2 class="split-title">Maximum FPS. Nothing Else.</h2>
-                    <p class="split-description">
-                        APEX Mode strips the game down to raw performance. No clutter, no distractions — just you, your aim, and maximum frames. Toggle it on and watch your FPS climb.
-                        <br><br>
-                        Built for players who want every competitive edge without the noise.
-                    </p>
-                    <div class="split-tagline">One toggle. Maximum performance.</div>
-                </div>
-                <div class="split-visual apex-visual-bg">
-                    <div class="apex-mockup">
-                        <div class="apex-badge-mockup">
-                            <div class="badge-label">MODE</div>
-                            <div class="badge-title">APEX</div>
-                            <div class="badge-status">● ACTIVE</div>
+            <div class="split-visual">
+                <div class="chat-mockup">
+                    <div class="chat-mockup-header">
+                        <div class="online-dot"></div>
+                        <span>Lobby Chat — 12 Online</span>
+                    </div>
+                    <div class="chat-mockup-messages">
+                        <div class="chat-msg">
+                            <span class="chat-author">Iydebu:</span>
+                            <span class="chat-text">yo who's down to run some games?</span>
                         </div>
-                        <div class="apex-screen-mockup">
-                            <div class="apex-fps-mockup">
-                                <span class="fps-label">ULTRA FPS</span>
-                                <span class="fps-value">144</span>
-                                <span class="fps-unit">FPS</span>
-                            </div>
+                        <div class="chat-msg">
+                            <span class="chat-author">ShadowX:</span>
+                            <span class="chat-text">im in, send invite</span>
                         </div>
+                        <div class="chat-msg">
+                            <span class="chat-author">NeonX:</span>
+                            <span class="chat-text">Iydebu the goat fr, just watched him drop 30</span>
+                        </div>
+                        <div class="chat-msg">
+                            <span class="chat-author">Iydebu:</span>
+                            <span class="chat-text">new skin looking crazy btw, check the store</span>
+                        </div>
+                        <div class="chat-msg">
+                            <span class="chat-author">AceShot:</span>
+                            <span class="chat-text">best client out, Iydebu built different</span>
+                        </div>
+                    </div>
+                    <div class="chat-mockup-input">
+                        <div class="chat-input-field">Type a message...</div>
+                        <button class="chat-send-btn">SEND</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="apex-features-grid">
-                <div class="apex-feature-card">
-                    <div class="apex-feature-icon">⚡</div>
-                    <div class="apex-feature-title">ULTRA FPS</div>
-                    <div class="apex-feature-desc">Permanent FPS counter so you always know your performance.</div>
-                </div>
-                <div class="apex-feature-card">
-                    <div class="apex-feature-icon">📸</div>
-                    <div class="apex-feature-title">Branded Screenshot</div>
-                    <div class="apex-feature-desc">Capture gameplay moments with Haze branding built in.</div>
-                </div>
-                <div class="apex-feature-card">
-                    <div class="apex-feature-icon">⚙</div>
-                    <div class="apex-feature-title">Engine Controls</div>
-                    <div class="apex-feature-desc">Smooth FPS, Render Engine, and Reboot controls at your fingertips.</div>
-                </div>
-                <div class="apex-feature-card">
-                    <div class="apex-feature-icon">🔄</div>
-                    <div class="apex-feature-title">Mode Selection</div>
-                    <div class="apex-feature-desc">Choose APEX or Normal mode. Switch anytime you want.</div>
+    <!-- Custom Skin Store Section -->
+    <section class="skin-store-section reveal-section" id="skin-store">
+        <div class="split-section reverse">
+            <div class="split-content">
+                <span class="split-tag">> SKIN_STORE</span>
+                <h2 class="split-title">Your Personal Skin Store</h2>
+                <p class="split-description">
+                    Browse, download, and equip from 30+ custom weapon skins — all inside the client. No mods, no file swapping, no hassle. Just pick a skin and it's yours.
+                    <br><br>
+                    New skins are added regularly. One-click download, instant equip. Your weapons, your style.
+                </p>
+                <div class="split-tagline">30+ skins. One-click equip. Always growing.</div>
+            </div>
+            <div class="split-visual">
+                <div class="store-mockup">
+                    <div class="store-mockup-header">
+                        <span>Skin Store</span>
+                        <span class="store-count">30+ Available</span>
+                    </div>
+                    <div class="store-grid">
+                        <div class="store-skin-card equipped">
+                            <div class="store-skin-icon">&#127919;</div>
+                            <div class="store-skin-name">Neon Viper</div>
+                            <div class="store-skin-type">Sniper Rifle</div>
+                        </div>
+                        <div class="store-skin-card">
+                            <div class="store-skin-icon">&#128299;</div>
+                            <div class="store-skin-name">Shadow Ops</div>
+                            <div class="store-skin-type">Assault Rifle</div>
+                        </div>
+                        <div class="store-skin-card">
+                            <div class="store-skin-icon">&#128165;</div>
+                            <div class="store-skin-name">Inferno</div>
+                            <div class="store-skin-type">Shotgun</div>
+                        </div>
+                        <div class="store-skin-card">
+                            <div class="store-skin-icon">&#10052;</div>
+                            <div class="store-skin-name">Frost Bite</div>
+                            <div class="store-skin-type">SMG</div>
+                        </div>
+                    </div>
+                    <div class="store-download-bar">
+                        <span>1-click download</span>
+                        <button class="store-dl-btn">BROWSE ALL</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2651,7 +2778,7 @@
     </section>
 
     <!-- Why Haze Section -->
-    <section class="why-section">
+    <section class="why-section reveal-section">
         <!-- Block 1: Instant Team-Ups -->
         <div class="split-section">
             <div class="split-content">
@@ -2671,14 +2798,14 @@
                             <div class="mockup-dot red"></div>
                             <div class="mockup-dot yellow"></div>
                             <div class="mockup-dot green"></div>
-                            <span class="mockup-title">Online Members</span>
+                            <span class="mockup-title">Online Players</span>
                         </div>
                         <ul class="invite-list">
                             <li class="invite-item">
                                 <div class="user">
                                     <div class="avatar">RK</div>
                                     <div>
-                                        <div class="name">[HAZE] RavenKing</div>
+                                        <div class="name">RavenKing</div>
                                         <div class="status">Playing now</div>
                                     </div>
                                 </div>
@@ -2688,7 +2815,7 @@
                                 <div class="user">
                                     <div class="avatar">SH</div>
                                     <div>
-                                        <div class="name">[HAZE] ShadowX</div>
+                                        <div class="name">ShadowX</div>
                                         <div class="status">In menu</div>
                                     </div>
                                 </div>
@@ -2698,7 +2825,7 @@
                                 <div class="user">
                                     <div class="avatar">NX</div>
                                     <div>
-                                        <div class="name">[HAZE] NeonX</div>
+                                        <div class="name">NeonX</div>
                                         <div class="status">Playing now</div>
                                     </div>
                                 </div>
@@ -2796,7 +2923,7 @@
     </section>
 
     <!-- Comparison Section -->
-    <section class="comparison-section" id="features">
+    <section class="comparison-section reveal-section" id="features">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">> THE_DIFFERENCE</span>
@@ -2810,11 +2937,11 @@
                     <ul class="comparison-list">
                         <li>
                             <span class="comparison-icon">❌</span>
-                            <span>Copy game links manually</span>
+                            <span>No in-game chat — alt-tab to Discord</span>
                         </li>
                         <li>
                             <span class="comparison-icon">❌</span>
-                            <span>Alt-tab to Discord to invite</span>
+                            <span>No skin store — default weapons only</span>
                         </li>
                         <li>
                             <span class="comparison-icon">❌</span>
@@ -2830,7 +2957,7 @@
                         </li>
                         <li>
                             <span class="comparison-icon">❌</span>
-                            <span>Play solo or wait for links</span>
+                            <span>Copy game links manually to invite</span>
                         </li>
                     </ul>
                 </div>
@@ -2846,11 +2973,11 @@
                     <ul class="comparison-list">
                         <li>
                             <span class="comparison-icon">✅</span>
-                            <span>One-click instant invites</span>
+                            <span>Built-in lobby chat — talk in-game</span>
                         </li>
                         <li>
                             <span class="comparison-icon">✅</span>
-                            <span>See online clan members live</span>
+                            <span>Custom skin store — 30+ skins</span>
                         </li>
                         <li>
                             <span class="comparison-icon">✅</span>
@@ -2858,7 +2985,7 @@
                         </li>
                         <li>
                             <span class="comparison-icon">✅</span>
-                            <span>30+ exclusive weapon skins</span>
+                            <span>One-click instant invites</span>
                         </li>
                         <li>
                             <span class="comparison-icon">✅</span>
@@ -2866,18 +2993,23 @@
                         </li>
                         <li>
                             <span class="comparison-icon">✅</span>
-                            <span>Team up in seconds, not minutes</span>
+                            <span>Free for everyone — no restrictions</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Quick Feature Icons -->
-            <div class="features-row">
+            <div class="features-row" style="grid-template-columns: repeat(5, 1fr);">
+                <div class="feature-box">
+                    <div class="feature-box-icon">💬</div>
+                    <div class="feature-box-title">Lobby Chat</div>
+                    <div class="feature-box-desc">Talk in-game</div>
+                </div>
                 <div class="feature-box">
                     <div class="feature-box-icon">🎨</div>
-                    <div class="feature-box-title">30+ Skins</div>
-                    <div class="feature-box-desc">Weapon customization</div>
+                    <div class="feature-box-title">Skin Store</div>
+                    <div class="feature-box-desc">30+ weapon skins</div>
                 </div>
                 <div class="feature-box">
                     <div class="feature-box-icon">🎯</div>
@@ -2899,10 +3031,10 @@
     </section>
 
     <!-- Social Proof Section -->
-    <section class="social-proof">
+    <section class="social-proof reveal-section">
         <div class="social-proof-content">
-            <h2>Join <span style="color: var(--color-primary);">200+</span> Elite Members</h2>
-            <p style="color: var(--color-fg-secondary); font-family: var(--font-body); font-size: var(--text-md);">The most active Deadshot.io clan trusts Haze Client</p>
+            <h2>Trusted by <span style="color: var(--color-primary);">200+</span> Players</h2>
+            <p style="color: var(--color-fg-secondary); font-family: var(--font-body); font-size: var(--text-md);">The Deadshot.io community's favorite client</p>
 
             <div class="social-proof-stats">
                 <div class="proof-stat">
@@ -2926,7 +3058,7 @@
                 </a>
                 <div class="trust-badge">
                     <span class="icon">✓</span>
-                    <span>Clan Verified</span>
+                    <span>Community Verified</span>
                 </div>
                 <div class="trust-badge">
                     <span class="icon">🔒</span>
@@ -2945,7 +3077,7 @@
     </section>
 
     <!-- Anti-Cheat Section -->
-    <section class="anticheat-section" id="anticheat">
+    <section class="anticheat-section reveal-section" id="anticheat">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">> ANTI_CHEAT</span>
@@ -3020,7 +3152,7 @@
     </section>
 
     <!-- Security Section -->
-    <section class="security-section" id="security">
+    <section class="security-section reveal-section" id="security">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">> SECURITY_FIRST</span>
@@ -3073,10 +3205,10 @@
     </section>
 
     <!-- Download CTA Section -->
-    <section class="download-cta" id="download">
+    <section class="download-cta reveal-section" id="download">
         <div class="download-cta-content">
             <h2>Ready to <span style="color: var(--color-primary);">dominate</span>?</h2>
-            <p>Download Haze Client V4.0 and join the elite.</p>
+            <p>Download the best Deadshot.io client. Free for everyone.</p>
 
             <div class="download-btn-group">
                 <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD FOR WINDOWS"><span class="glitch-scanlines"></span>> DOWNLOAD FOR WINDOWS</a>
@@ -3084,7 +3216,7 @@
             </div>
 
             <p class="version-info">
-                <span>></span> Version <span>4.2.0</span> | Windows 10/11 | 64-bit | Auto-updates enabled
+                <span>></span> Version <span>1.0.0</span> | Windows 10/11 | 64-bit | Auto-updates enabled
             </p>
 
             <div class="platform-badges">
@@ -3098,8 +3230,8 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo"><img src="logo.png" alt="Haze">HAZE CLIENT V4.0</div>
-            <p class="footer-text">Elite Deadshot.io gaming client for Haze clan members.</p>
+            <div class="footer-logo"><img src="logo.png" alt="Haze">HAZE CLIENT V1.0</div>
+            <p class="footer-text">The #1 Deadshot.io client — free for every player.</p>
             <div class="footer-links">
                 <a href="https://github.com/iydebu/HT1-Client-Releases" target="_blank">GitHub</a>
 
@@ -3107,8 +3239,8 @@
                 <a href="https://deadshot.io" target="_blank">Deadshot.io</a>
             </div>
             <div class="copyright">
-                <p><span style="color: var(--color-primary);">></span> 2026 Haze Client. Built with <span style="color: var(--color-primary);">♥</span> for the Haze clan.</p>
-                <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. For Haze clan members only.</p>
+                <p><span style="color: var(--color-primary);">></span> 2026 Haze Client. Built with <span style="color: var(--color-primary);">♥</span> for the Deadshot.io community.</p>
+                <p style="margin-top: 10px; font-size: 12px;">Not affiliated with Deadshot.io. Free and open for everyone.</p>
             </div>
         </div>
     </footer>
@@ -3883,7 +4015,7 @@
             var targetX = 0, targetY = 0;
 
             // Hoverable selectors for expansion effect
-            var hoverSelectors = 'a, button, .btn, .invite-btn, .crosshair-item, .feature-box, .apex-feature-card, .anticheat-feature-card, .security-feature-box, .trust-badge, .comparison-card';
+            var hoverSelectors = 'a, button, .btn, .invite-btn, .crosshair-item, .feature-box, .anticheat-feature-card, .security-feature-box, .trust-badge, .comparison-card, .store-skin-card, .chat-msg';
 
             document.addEventListener('mousemove', function(e) {
                 targetX = e.clientX;
