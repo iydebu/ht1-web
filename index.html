@@ -1135,6 +1135,95 @@
         }
 
         /* ============================================
+           SECTION: Testimonials
+           ============================================ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+            max-width: 1000px;
+            margin: var(--space-12) auto 0;
+        }
+
+        .testimonial-card {
+            background: rgba(10, 10, 10, 0.9);
+            border: var(--border-default);
+            border-radius: 12px;
+            padding: var(--space-6);
+            text-align: left;
+            transition: border-color var(--duration-normal) var(--ease-default),
+                        transform var(--duration-normal) var(--ease-default);
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--color-border-hover);
+            transform: translateY(-2px);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: var(--weight-bold);
+            font-size: var(--text-sm);
+            color: var(--color-bg-base);
+            flex-shrink: 0;
+        }
+
+        .testimonial-user {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-name {
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-semibold);
+            color: var(--color-fg-primary);
+        }
+
+        .testimonial-version {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--color-fg-tertiary);
+            letter-spacing: var(--tracking-wide);
+        }
+
+        .testimonial-rating {
+            margin-left: auto;
+            font-size: var(--text-sm);
+            color: #FBBF24;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            color: var(--color-fg-secondary);
+            font-style: italic;
+        }
+
+        .testimonial-date {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--color-fg-tertiary);
+            margin-top: var(--space-3);
+            letter-spacing: var(--tracking-wide);
+        }
+
+        /* ============================================
            SECTION: Security
            ============================================ */
         .security-section {
@@ -2092,6 +2181,10 @@
             }
             .proof-number {
                 font-size: var(--text-3xl);
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
             }
 
             /* Download CTA */
@@ -3052,7 +3145,7 @@
             </div>
 
             <div class="trust-badges">
-                <a href="https://www.virustotal.com/gui/file/1ed1d02a4ed72a9744494582b49ad44976141bbb03897662e821a752e524c100?nocache=1" target="_blank" class="trust-badge" style="text-decoration: none; cursor: pointer;">
+                <a href="https://www.virustotal.com/gui/file-analysis/YTE1MmFlZjVjZmI3NjVmMTAxZTVmMDIxY2U0N2Q3MWE6MTc3MTMzMTQ5OQ==" target="_blank" class="trust-badge" style="text-decoration: none; cursor: pointer;">
                     <img src="https://www.virustotal.com/gui/images/manifest/icon-192x192.png" alt="VirusTotal" width="20" height="20" style="border-radius: 4px;">
                     <span>VirusTotal Verified</span>
                 </a>
@@ -3071,6 +3164,64 @@
                 <div class="trust-badge">
                     <span class="icon">💬</span>
                     <span>Discord Support</span>
+                </div>
+            </div>
+
+            <!-- Real User Testimonials -->
+            <h3 style="font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-fg-primary); margin-top: var(--space-12); margin-bottom: var(--space-2);">What Players Are Saying</h3>
+            <p style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-fg-tertiary); letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-bottom: var(--space-6);">Real feedback from real players</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">K</div>
+                        <div class="testimonial-user">
+                            <span class="testimonial-name">[HT1] Krygz</span>
+                            <span class="testimonial-version">v3.0.6 · win32</span>
+                        </div>
+                        <div class="testimonial-rating">★★★★★</div>
+                    </div>
+                    <p class="testimonial-quote">"The client in its entirety is built to provide better gaming performance as well as some sick modifications. The client is darn good."</p>
+                    <div class="testimonial-date">01/02/2026</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-user">
+                            <span class="testimonial-name">one Saksham</span>
+                            <span class="testimonial-version">v3.0.6 · win32</span>
+                        </div>
+                        <div class="testimonial-rating">★★★★★</div>
+                    </div>
+                    <p class="testimonial-quote">"Far better than v2.0.1 and its performance feature is superb. I totally got the freedom to change graphic backends — which is awesome for players like me! 9/10!"</p>
+                    <div class="testimonial-date">01/02/2026</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">B</div>
+                        <div class="testimonial-user">
+                            <span class="testimonial-name">[HT1] Beelzebub 429</span>
+                            <span class="testimonial-version">v3.0.1 · win32</span>
+                        </div>
+                        <div class="testimonial-rating">★★★★★</div>
+                    </div>
+                    <p class="testimonial-quote">"Amazing client."</p>
+                    <div class="testimonial-date">01/02/2026</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-user">
+                            <span class="testimonial-name">[HT1] Aagstya</span>
+                            <span class="testimonial-version">v3.0.1 · win32</span>
+                        </div>
+                        <div class="testimonial-rating">★★★★★</div>
+                    </div>
+                    <p class="testimonial-quote">"Game working good, I'm happy to say that it was really good."</p>
+                    <div class="testimonial-date">31/01/2026</div>
                 </div>
             </div>
         </div>
@@ -3167,7 +3318,7 @@
                     </div>
                     <h3>VirusTotal Verified</h3>
                     <p>Our client has been scanned by 70+ antivirus engines. Zero threats detected. Don't take our word for it - check the report yourself.</p>
-                    <a href="https://www.virustotal.com/gui/file/1ed1d02a4ed72a9744494582b49ad44976141bbb03897662e821a752e524c100?nocache=1" target="_blank" class="btn btn-secondary security-btn">> VIEW VIRUSTOTAL REPORT</a>
+                    <a href="https://www.virustotal.com/gui/file-analysis/YTE1MmFlZjVjZmI3NjVmMTAxZTVmMDIxY2U0N2Q3MWE6MTc3MTMzMTQ5OQ==" target="_blank" class="btn btn-secondary security-btn">> VIEW VIRUSTOTAL REPORT</a>
                     <div class="scan-result">
                         <span class="scan-status">✓ 0/70+ detections</span>
                     </div>
@@ -3211,7 +3362,7 @@
             <p>Download the best Deadshot.io client. Free for everyone.</p>
 
             <div class="download-btn-group">
-                <a href="https://iydebu.short.gy/ht1-client" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD FOR WINDOWS"><span class="glitch-scanlines"></span>> DOWNLOAD FOR WINDOWS</a>
+                <a href="https://iydebu.short.gy/haze-client" class="btn btn-primary download-btn btn-glitch" data-text="> DOWNLOAD FOR WINDOWS"><span class="glitch-scanlines"></span>> DOWNLOAD FOR WINDOWS</a>
                 <a href="https://discord.gg/Asa9QvFKJq" target="_blank" class="btn btn-discord btn-glitch" data-text="> JOIN DISCORD"><span class="glitch-scanlines"></span>> JOIN DISCORD</a>
             </div>
 
@@ -4015,7 +4166,7 @@
             var targetX = 0, targetY = 0;
 
             // Hoverable selectors for expansion effect
-            var hoverSelectors = 'a, button, .btn, .invite-btn, .crosshair-item, .feature-box, .anticheat-feature-card, .security-feature-box, .trust-badge, .comparison-card, .store-skin-card, .chat-msg';
+            var hoverSelectors = 'a, button, .btn, .invite-btn, .crosshair-item, .feature-box, .anticheat-feature-card, .security-feature-box, .trust-badge, .comparison-card, .store-skin-card, .chat-msg, .testimonial-card';
 
             document.addEventListener('mousemove', function(e) {
                 targetX = e.clientX;
